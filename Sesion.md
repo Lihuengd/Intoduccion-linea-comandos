@@ -11,6 +11,7 @@ Como hemos dicho, Bash es un intérprete de órdenes, por lo que nos va a permit
 Una vez que Bash recibe la órden desde nuestro teclado (entrada estándar) y la interpreta correctamente, esta será ejecutada por el ordenador y nos imprimirá una respuesta en nuestra pantalla (salida estándar). En resúmen, este es el funcionamiento de Bash.
 ![Entrada-orden-salida](Imagenes/Entrada-orden-salida.jpg)
 
+
 ## 2. Navegación por el sistema de ficheros
 `codigo`
 ![Nombre-imagen](nombre-imagen.jpg)
