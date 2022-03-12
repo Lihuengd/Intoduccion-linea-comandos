@@ -14,7 +14,9 @@ Una vez que Bash recibe la órden desde nuestro teclado (entrada estándar) y la
 `codigo`
 ![Nombre-imagen](nombre-imagen.jpg)
 ## 2. Navegación por el sistema de ficheros
+Despues de esta introducción, empezarémos con nuestros primeros comandos. Un aspecto básico y fundamental cuando trabajamos en la shell, es la navegación a través de nuestro sistema de ficheros. Normalmente, accedemos a nuestros documentos usando un explorador de archivos en el que los ficheros (archihvos) se encuentran organizados en directorios (carpetas) en un sistema jerarquico, y simplemente haciendo *clic* sobre ellos accedemos al directorio deseado, abrimos documentos, eliminamos ficheros, etc. En la terminal podremos hacer exactamente lo mismo, y para ello existen un conjunto de órdenes o comandos que usaremos continuamente.
 
+El primer comando que usaremos sera `pwd`. 
 ## 3. Redirección de entradas y salidas
 
 ## 4. Filtros básicos
