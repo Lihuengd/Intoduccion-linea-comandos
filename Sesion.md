@@ -32,7 +32,12 @@ uid=197609(lihuen) gid=197609 groups=197609
 ```
 En resúmen, esto sería nuestro nombre y DNI. Ahora que ya sabemos dónde estamos y quienes somos, estaría bien saber si hay alguien con nosotros, aparte de ese ente superior que nos contesta a todas nuestras preguntas. En nuestro caso, estarémos sólos la mayoría, pero suele ser común en informática trabajar en servidores externos más potentes que el de nuestro ordenador. En estos casos, no serémos los únicos que usamos el servidor y viene bien saber quién esta con nosotros (comando `who`) e, incluso, interactuar con otros usuarios (comando `write`). 
 
-Además de estas preguntas básicas, también podemos preguntar quñé hay a nuestro alrededor con la órden `ls`.
+Además de estas preguntas básicas, también podemos preguntar qué hay a nuestro alrededor. Para ello, usamos la órden `ls`, que devolverá por pantalla la lista de ficheros y/o directorios que hay dentro del directorio de trabajo en el que nos encontramos. ls tambien acepta como argumento una ruta o directorio concreto para ver su contenido sin necesidad de desplazarnos hasta dicho directorio para consultarlo.
+```
+ls
+ls directorio
+```
+Llegados aquí es bueno apuntar que en Bash las órdenes tienen diferentes opciones que modifican ligeramente la función y nos pueden ser muy útiles cuando queremos hacer cosas concretas. Ejemplos de ello serian la opcion -l, -a y -d de la órden `ls`. Usando `ls -l` conseguiremos información detallada de cada directorio o fichero que se encuentre en el directorio de trabajo (permisos, dueño, inodo, tamaño, fecha de última mofidicación, etc).  Por su parte, usando `ls -a` podemos ver directorios ocultos, que distinguiremos por que sus nombres empiezan con un punto. 
 ## 3. Redirección de entradas y salidas
 
 ## 4. Filtros básicos
