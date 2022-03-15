@@ -52,15 +52,37 @@ Ahora toca aprender a moverse por el sistema de ficheros. El comando más import
 cd
 cd directorio1/directorio2
 ```
-Algo muy útil para movernos por nuetsro sistema de ficheros es indicarle a `cd` que nos lleve al directorio padre del directorio de trabajo, es decir, un directorio hacia atrás. Esto lo hacemos con dos puntos `cd..`
+Algo muy útil para movernos por nuetsro sistema de ficheros es indicarle a `cd` que nos lleve al directorio padre del directorio de trabajo, es decir, un directorio hacia atrás. Esto lo hacemos con dos puntos 
 ```
+pwd
 cd..
+pwd
 ```
+Y si queremos crear un directorio nuevo para trabajar dentro de él, usamos la órden `mkdir` y el nombre del nuevo directorio. Prueba creando un directorio con el nombre Curso-bioinfo. A partir de ahora este será tu directorio de trabajo. Si queremos borrar un directorio usamos la órden rmdir, pero ésta solo funcionará si el directorio está vacío.
+
+Otras órdenes muy úitiles para trabajar en línea de comandos son `cp`, `mv` y `rm`. Sirven para copiar, mover y borrar ficheros o directorioas, respectivamente. 
+....
+.
+.
+.
+.
+.
+Cuando 
 ## 3. Redirección de entradas y salidas
+Hasta ahora hemos visto cómo darle una órden a Bash  y este las ejecuta devilviendo su respuesta por pantalla. De hecho, ahora mismo tendrás tu pantalla llena de cosas. Si en algún momento te agobias y quieres limpiar tu pantalla, teclea `clear` y todo irá mucho mejor.
 
-## 4. Filtros básicos
+Como os decia, la pantalla es la "salida estandar", ya que, a no ser que le indiquemos lo contrario, Bash imprimirá por defecto el resultado en la pantalla. Imaginemos que queremos guardar el resultado de la órden `ls` en un fichero para consultarlo más tarde. Basta con redirigir el resultado de `ls` a un fichero nuevo con el símbolo mayor que (>). 
+```
+ls > fichero-nuevo.txt
+```
+En este caso, se creará un fichero nuevo con el resultado de `ls`. Si el archivo fichero-nuevo.txt estuviera creado ya, lo que estaríamos haciendo es sobreescribirlo, es decir, borrar todo su contenido y escribir el contenido nuevo. Si lo que queremos es añadir el resultado de `ls` a algo que ya tenemos escrito en un fichero debemos redirigir la esalida con una doble símbolo mayor que (>>). Vamos a probar añadir el resultado de un nuevo comando `date` al contenido del fichero-nuevo.txt. ¿Sabríais decirme qué hace `date`?
 
-## 5. Filtros avanzados
 
-## 6. Virtual Box
+## 4. Edición de ficheros 
+
+## 5. Filtros básicos
+## 6. Pipelines
+## 7. Filtros avanzados
+
+## 8. Virtual Box
 
