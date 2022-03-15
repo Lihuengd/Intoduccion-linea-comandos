@@ -47,7 +47,15 @@ man ls
 ls --help
 ```
 ### Primeros pasos
-Visto esto, ahora toca aprender a moverse por el sistema de ficheros
+Ahora toca aprender a moverse por el sistema de ficheros. El comando más importante es `cd` (*change directory*). Si introducimo `cd` sin argumento, nos moveremos hacia el directorio raíz, mientras que si le indicamos una ruta, nos llevará al directorio indicado por la ruta. 
+```
+cd
+cd directorio1/directorio2
+```
+Algo muy útil para movernos por nuetsro sistema de ficheros es indicarle a `cd` que nos lleve al directorio padre del directorio de trabajo, es decir, un directorio hacia atrás. Esto lo hacemos con dos puntos `cd..`
+```
+cd..
+```
 ## 3. Redirección de entradas y salidas
 
 ## 4. Filtros básicos
