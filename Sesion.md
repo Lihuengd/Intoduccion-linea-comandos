@@ -83,7 +83,7 @@ Hasta ahora hemos visto cómo darle una órden a Bash  y este las ejecuta devilv
 
 Como os decia, la pantalla es la "salida estandar", ya que, a no ser que le indiquemos lo contrario, Bash imprimirá por defecto el resultado en la pantalla. Por su parte, la entrada estándar es nuestro teclado. En Bash, podemos hacer que la salida y la entrada dejen de ser la estándar y sean, por ejemplo, un fichero que le indiquemos.
 ![Redireccion-entrada-salida](Imagenes/Redireccion-entrada-salida.png)
-Pongámoslo en práctica. Imaginemos que queremos guardar el resultado de la órden `ls` en un fichero para consultarlo más tarde. Basta con redirigir el resultado de `ls` a un fichero nuevo con el símbolo mayor que (>). 
+Pongámoslo en práctica. Imaginemos que queremos guardar el resultado de la órden `ls` en un fichero para consultarlo más tarde. Basta con redirigir el resultado de `ls` a un fichero de texto nuevo con el símbolo mayor que (>). 
 ```
 ls > fichero-nuevo.txt
 ```
@@ -91,11 +91,48 @@ En este caso, se creará un fichero nuevo con el resultado de `ls`. Si el archiv
 ```
 date >> fichero-nuevo.txt
 ```
-¿Sabríais decirme qué hace `date`?
+¿Sabríais decirme qué hace `date`? Para ello, tendríamos que ver lo que hay dentro de nuestro fichero-nuevo.txt. Esto lo harémos con la órden `cat`, que mostrará por pantalla todo el contenido de nuestro fichero.
+```
+cat fichero-nuevo.txt
+```
+
+De la misma forma, podemos redirirgir la entrada para que nuestras órdenes se ejecuten sobre la información de un fichero. Para ello, tendríamos que usar el símbolo menor que (<), pero esto lo pondrémos en práctica más adelante.
 
 ## 4. Edición de ficheros 
+Una de las partes básicas y más importantes cuando trabajamos en línea de comandos es la edición de ficheros. En este curso veremos dos opciones. La primera de ellas es `cat`, que ya la hemos usado. En realidad, la accion de `cat` simplemente consiste en imprimir por pantalla lo que recibe desde el teclado, de forma que si invocamos `cat`sin argumentos se va a quedar esperando a que le introduzcamos información por nuestro teclado. Cuando le introducimos algo y pulsamos 'enter', `cat` repite todo lo que tecleamos.
+```
+cat
+lunes
+lunes
+martes
+martes
+[[Ctrl+C]] para interrumpir este proceso de forma abrupta y salir de este bucle
+``` 
+Si nosotros redirigimos la salida de `cat` a un fichero llamado dias-de-la-semana.txt, escribimos los días de la semana y al teminar pulsamos `Ctrl+D` (interrumpe procesos de forma no abrupta), habremos creado un fichero nuevo con los días de la semana.
+```
+cat > dias-de-la-semana.txt
+lunes
+martes
+miercoles
+jueves
+viernes
+sabado
+domingo
+[[Ctrl+D]]
+```
+```
+cat dias-de-la-semana
+lunes
+martes
+miercoles
+jueves
+viernes
+sabado
+domingo
+```
 
 ## 5. Filtros básicos
+Además de para leer y editar textos, `cat`se podría considerar el filtro mas simple de Bash, ya que no hace nada con la información que le pasamos, la deja como estaba. Existen otros filtros muy útiles y que usaremos muy amenudo. Como su propio nombre indica, estos comandos filtran la información que se les pasa por la entrada y devuelven lo que nos interesa. Por ejemplo, el filtro `sort` ordena todas las líneas de un fichero.
 ## 6. Pipelines
 ## 7. Filtros avanzados
 
