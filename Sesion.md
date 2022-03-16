@@ -81,9 +81,9 @@ Truquillos: autocompletado con el tabulador y acceso a comandos anteriores con l
 ## 3. Redirección de entradas y salidas
 Hasta ahora hemos visto cómo darle una órden a Bash  y este las ejecuta devilviendo su respuesta por pantalla (la salida estándar). De hecho, ahora mismo tendrás tu pantalla llena de cosas. Si en algún momento te agobias y quieres limpiar tu pantalla, teclea `clear` y obtendrás paz mental.
 
-Como os decia, la pantalla es la "salida estandar", ya que, a no ser que le indiquemos lo contrario, Bash imprimirá por defecto el resultado en la pantalla. 
-
-Imaginemos que queremos guardar el resultado de la órden `ls` en un fichero para consultarlo más tarde. Basta con redirigir el resultado de `ls` a un fichero nuevo con el símbolo mayor que (>). 
+Como os decia, la pantalla es la "salida estandar", ya que, a no ser que le indiquemos lo contrario, Bash imprimirá por defecto el resultado en la pantalla. Por su parte, la entrada estándar es nuestro teclado. En Bash, podemos hacer que la salida y la entrada dejen de ser la estándar y sean, por ejemplo, un fichero que le indiquemos.
+![Redireccion-entrada-salida](Imagenes/Redireccion-entrada-salida.png)
+Pongámoslo en práctica. Imaginemos que queremos guardar el resultado de la órden `ls` en un fichero para consultarlo más tarde. Basta con redirigir el resultado de `ls` a un fichero nuevo con el símbolo mayor que (>). 
 ```
 ls > fichero-nuevo.txt
 ```
@@ -92,7 +92,7 @@ En este caso, se creará un fichero nuevo con el resultado de `ls`. Si el archiv
 date >> fichero-nuevo.txt
 ```
 ¿Sabríais decirme qué hace `date`?
-![Redireccion-entrada-salida](Imagenes/Redireccion-entrada-salida.png)
+
 ## 4. Edición de ficheros 
 
 ## 5. Filtros básicos
