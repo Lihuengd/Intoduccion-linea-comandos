@@ -130,7 +130,7 @@ viernes
 sabado
 domingo
 ```
-
+Sin embargo, cat es bastante rudimentario y limitado. Por ejemplo, no me dejaría editar el fichero existente para añadir tíldes a los días de la semana. Para ello, es mejor usar verdaderos editores de texto, como nano, el editor mas usado.
 ## 5. Filtros básicos
 Además de para leer y editar textos, `cat`se podría considerar el filtro mas simple de Bash, ya que no hace nada con la información que le pasamos, la deja como estaba. Existen otros filtros muy útiles y que usaremos muy amenudo. Como su propio nombre indica, estos comandos filtran la información que se les pasa por la entrada y devuelven lo que nos interesa. Por ejemplo, el filtro `sort` ordena todas las líneas de un fichero.
 ## 6. Pipelines
