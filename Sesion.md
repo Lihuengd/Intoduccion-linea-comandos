@@ -79,7 +79,7 @@ Una opción interesante de `cp` y `rm` es la opcion -r (*recursive*), que copiar
 Truquillos: autocompletado con el tabulador y acceso a comandos anteriores con las flechas
 
 ## 3. Redirección de entradas y salidas
-Hasta ahora hemos visto cómo darle una órden a Bash  y este las ejecuta devilviendo su respuesta por pantalla (la salida estándar). De hecho, ahora mismo tendrás tu pantalla llena de cosas. Si en algún momento te agobias y quieres limpiar tu pantalla, teclea `clear` y obtendrás paz mental.
+Hasta ahora hemos visto cómo darle una órden a Bash  y cómo este las ejecuta devilviendo su respuesta por pantalla (la salida estándar). De hecho, ahora mismo tendrás tu pantalla llena de cosas. Si en algún momento te agobias y quieres limpiar tu pantalla, teclea `clear` y obtendrás paz mental.
 
 Como os decia, la pantalla es la "salida estandar", ya que, a no ser que le indiquemos lo contrario, Bash imprimirá por defecto el resultado en la pantalla. Por su parte, la entrada estándar es nuestro teclado. En Bash, podemos hacer que la salida y la entrada dejen de ser la estándar y sean, por ejemplo, un fichero que le indiquemos.
 ![Redireccion-entrada-salida](Imagenes/Redireccion-entrada-salida.png)
@@ -91,7 +91,7 @@ En este caso, se creará un fichero nuevo con el resultado de `ls`. Si el archiv
 ```
 date >> fichero-nuevo.txt
 ```
-¿Sabríais decirme qué hace `date`? Para ello, tendríamos que ver lo que hay dentro de nuestro fichero-nuevo.txt. Esto lo harémos con la órden `cat`, que mostrará por pantalla todo el contenido de nuestro fichero.
+¿Sabríais decirme qué hace `date`? Para ello, tendríamos que ver lo que hay dentro de nuestro fichero-nuevo.txt. Esto lo harémos con la órden `cat` (*con-cat-enate*), que mostrará por pantalla todo el contenido de nuestro fichero.
 ```
 cat fichero-nuevo.txt
 ```
@@ -130,7 +130,7 @@ viernes
 sabado
 domingo
 ```
-Sin embargo, cat es bastante rudimentario y limitado. Por ejemplo, no me dejaría editar el fichero existente para añadir tíldes a los días de la semana. Para ello, es mejor usar verdaderos editores de texto, como nano, el editor mas usado.
+Sin embargo, `cat` es bastante rudimentario y limitado. Por ejemplo, no me dejaría editar el fichero existente para añadir tíldes a los días de la semana. Para ello, es mejor usar verdaderos editores de texto, como `nano`, el editor mas usado.
 ## 5. Filtros básicos
 Además de para leer y editar textos, `cat`se podría considerar el filtro mas simple de Bash, ya que no hace nada con la información que le pasamos, la deja como estaba. Existen otros filtros muy útiles y que usaremos muy amenudo. Como su propio nombre indica, estos comandos filtran la información que se les pasa por la entrada y devuelven lo que nos interesa. Por ejemplo, el filtro `sort` ordena todas las líneas de un fichero.
 ## 6. Pipelines
