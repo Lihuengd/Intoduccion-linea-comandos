@@ -135,8 +135,8 @@ Sin embargo, `cat` es bastante rudimentario y limitado. Por ejemplo, no me dejar
 nano fichero-nuevo2.txt
 ```
 
-## 5. Filtros básicos
-Además de para leer y crear ficheros de texto, `cat` se podría considerar el filtro más simple de Bash, ya que no hace nada con la información que le pasamos, la deja como estaba. Existen otros filtros muy útiles y que usaremos muy amenudo. Como su propio nombre indica, estos comandos filtran la información que se les pasa por la entrada y devuelven lo que nos interesa. Por ejemplo, el filtro `sort` ordena todas las líneas de un fichero. Vamos a usarlo con nuestro fichero dias-de-la-semana.txt.
+## 5. Filtros básicos y pipelines
+Además de para leer y crear ficheros de texto, `cat` se podría considerar el **filtro** más simple de Bash, ya que no hace nada con la información que le pasamos, la deja como estaba. Existen otros filtros muy útiles y que usaremos muy amenudo. Como su propio nombre indica, estos comandos filtran la información que se les pasa por la entrada y devuelven lo que nos interesa. Por ejemplo, el filtro `sort` ordena todas las líneas de un fichero. Vamos a usarlo con nuestro fichero dias-de-la-semana.txt.
 ```
 sort dias-de-la-semana
 domingo
@@ -169,7 +169,7 @@ AP017922.1      FIG     CDS     10887   11114   .       +       0       ID=fig|6
 AP017922.1      FIG     CDS     11115   12401   .       +       0       ID=fig|6666666.735992.peg.9;Name=Histidine ammonia-lyase (EC 4.3.1.3);Ontology_term=KEGG_ENZYME:4.3.1.3
 ```
 
-````
+```
 tail Staphylococcus-aureus.gtf
 AP017922.1      FIG     tRNA    2159860 2159934 .       -       .       ID=fig|6666666.735992.rna.73;Name=tRNA-Asn-GTT
 AP017922.1      FIG     RNA     2159943 2160064 .       -       .       ID=fig|6666666.735992.rna.74;Name=5S rRNA
@@ -191,9 +191,27 @@ Si has sido lo suficientemente observador, te habrás fijado en que la tercera c
 ```
 cut -f1-3 Staphylococcus-aureus.gtf
 ```
-Nos habrán aparecido en pantalla un monton de líneas. Sin embargo, lo que a nosotros nos interesa es el número que hay de cada *feature*
-## 6. Pipelines
-## 7. Filtros avanzados
+Nos habrán aparecido en pantalla un monton de líneas. Sin embargo, lo que a nosotros nos interesa es el número que hay de cada *feature*. El filtro `uniq`nos ayudará, ya que su función es quitar ocurrencias repetidas, es decir, nos mostrará por pantalla sólo las líneas únicas. Además, con la opción -c nos contará cuántas veces aparece cada línea.
+```
+cut -f1-3 Staphylococcus-aureus.gtf | uniq -c
+      1 ##gff-version 3
+   2551 AP017922.1      FIG     CDS
+      9 AP017922.1      FIG     tRNA
+     12 AP017922.1      FIG     RNA
+     24 AP017922.1      FIG     tRNA
+      3 AP017922.1      FIG     RNA
+      3 AP017922.1      FIG     tRNA
+      6 AP017922.1      FIG     RNA
+    114 AP017922.1      FIG     tRNA
+      6 AP017922.1      FIG     RNA
+      6 AP017922.1      FIG     tRNA
+     12 AP017922.1      FIG     RNA
+     24 AP017922.1      FIG     tRNA
+      9 AP017922.1      FIG     RNA
+```
 
-## 8. Virtual Box
+Como podeis ver, hemos introducido un símbolo nuevo (`|`), la barra o pipe. Este símbolo tiene una función clave: pasar la salida de `cut` como entrada de `uniq`. En informática, la encadenación de funciones de diferentes órdenes para obtener un resultado final deseado se conoce como **pipeline** o tubería. 
+
+## 6. Filtros avanzados
+
 
