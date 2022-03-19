@@ -130,9 +130,68 @@ viernes
 sabado
 domingo
 ```
-Sin embargo, `cat` es bastante rudimentario y limitado. Por ejemplo, no me dejaría editar el fichero existente para añadir tíldes a los días de la semana. Para ello, es mejor usar verdaderos editores de texto, como `nano`, el editor mas usado.
+Sin embargo, `cat` es bastante rudimentario y limitado. Por ejemplo, no me dejaría editar el fichero existente para añadir tíldes a los días de la semana y por eso, no podemos decir que `cat` sea un editor de textos. Para ello, es mejor usar verdaderos editores de texto, como `nano`, el editor más usado. `nano` es una herramienta que nos sirve para crear y editar ficheros de texto plano. Los ficheros de texto a los que estamos acostumbrados (ficheros .doc como los de Word) no son ficheros de texto plano, por lo que `nano` no podrá trabajar con ellos. Prueba a crear un fichero-nuevo2.txt con `nano` e inspecciona la interfaz de `nano` para acostumbrarte a ella. Es bastab¡nte intuitiva.
+```
+nano fichero-nuevo2.txt
+```
+
 ## 5. Filtros básicos
-Además de para leer y editar textos, `cat`se podría considerar el filtro mas simple de Bash, ya que no hace nada con la información que le pasamos, la deja como estaba. Existen otros filtros muy útiles y que usaremos muy amenudo. Como su propio nombre indica, estos comandos filtran la información que se les pasa por la entrada y devuelven lo que nos interesa. Por ejemplo, el filtro `sort` ordena todas las líneas de un fichero.
+Además de para leer y crear ficheros de texto, `cat` se podría considerar el filtro más simple de Bash, ya que no hace nada con la información que le pasamos, la deja como estaba. Existen otros filtros muy útiles y que usaremos muy amenudo. Como su propio nombre indica, estos comandos filtran la información que se les pasa por la entrada y devuelven lo que nos interesa. Por ejemplo, el filtro `sort` ordena todas las líneas de un fichero. Vamos a usarlo con nuestro fichero dias-de-la-semana.txt.
+```
+sort dias-de-la-semana
+domingo
+jueves
+lunes
+martes
+miercoles
+sabado
+viernes
+```
+
+Hsata ahora, los filtros no parecen tener mucha utilidad, esto podríamos hacerlo perfectamente en una hoja de cálculo o en un editor de texto. Sin embargo, cuando trabajamos con información derivada de la secuenciacion de ADN, solemos trabajar con archivos muy grandes y pesados que tardan en abrirse y hasta la operación más simple como ordenar sus filas sería un dolor. Así que a partir de ahora vamos a trabajar con un ficheros reales. 
+
+En este repositorio disponeis de un archivo `Staphylococcus-aureus.gtf`. Vamos a inspeccionar este fichero con la órden `less` que tiene la vemtaja de no cargar todo el contenido del fichero en la memoria para mostrarlo, lo que lo hace muy eficiente en memoria. 
+```
+less Staphylococcus-aureus.gtf
+```
+Con `less` podemos inspeccionar cada línea del fichero, incluso hasta la última línea presionando enter. A estas alturas ya habrás podido comprobar el tamaño de nuestro fichero. Presiona "q" (*quit*) para salir de `less`. Otra opción cuando no queremos cargar todo el contenido de un fichero en nuestra pantalla es usar los filtros `head` y `tail` que mostrarán las 10 primeras y las 10 últimas líneas de nuestro fichero, respectivamente.
+```
+head Staphylococcus-aureus.gtf
+##gff-version 3
+AP017922.1      FIG     CDS     517     1878    .       +       1       ID=fig|6666666.735992.peg.1;Name=Chromosomal replication initiator protein DnaA
+AP017922.1      FIG     CDS     2155    3288    .       +       1       ID=fig|6666666.735992.peg.2;Name=DNA polymerase III beta subunit (EC 2.7.7.7);Ontology_term=KEGG_ENZYME:2.7.7.7
+AP017922.1      FIG     CDS     3678    3914    .       +       0       ID=fig|6666666.735992.peg.3;Name=Uncharacterized S4 RNA-binding-domain protein YbcJ
+AP017922.1      FIG     CDS     3911    5023    .       +       2       ID=fig|6666666.735992.peg.4;Name=DNA recombination and repair protein RecF
+AP017922.1      FIG     CDS     5033    6967    .       +       2       ID=fig|6666666.735992.peg.5;Name=DNA gyrase subunit B (EC 5.99.1.3);Ontology_term=KEGG_ENZYME:5.99.1.3
+AP017922.1      FIG     CDS     7004    9664    .       +       2       ID=fig|6666666.735992.peg.6;Name=DNA gyrase subunit A (EC 5.99.1.3);Ontology_term=KEGG_ENZYME:5.99.1.3
+AP017922.1      FIG     CDS     9750    10562   .       -       0       ID=fig|6666666.735992.peg.7;Name=ADP-dependent (S)-NAD(P)H-hydrate dehydratase (EC 4.2.1.136);Ontology_term=KEGG_ENZYME:4.2.1.136
+AP017922.1      FIG     CDS     10887   11114   .       +       0       ID=fig|6666666.735992.peg.8;Name=Histidine ammonia-lyase (EC 4.3.1.3);Ontology_term=KEGG_ENZYME:4.3.1.3
+AP017922.1      FIG     CDS     11115   12401   .       +       0       ID=fig|6666666.735992.peg.9;Name=Histidine ammonia-lyase (EC 4.3.1.3);Ontology_term=KEGG_ENZYME:4.3.1.3
+```
+
+````
+tail Staphylococcus-aureus.gtf
+AP017922.1      FIG     tRNA    2159860 2159934 .       -       .       ID=fig|6666666.735992.rna.73;Name=tRNA-Asn-GTT
+AP017922.1      FIG     RNA     2159943 2160064 .       -       .       ID=fig|6666666.735992.rna.74;Name=5S rRNA
+AP017922.1      FIG     RNA     2159943 2160064 .       -       .       ID=fig|6666666.735992.rna.74;Name=5S rRNA
+AP017922.1      FIG     RNA     2159943 2160064 .       -       .       ID=fig|6666666.735992.rna.74;Name=5S rRNA
+AP017922.1      FIG     RNA     2160134 2163058 .       -       .       ID=fig|6666666.735992.rna.75;Name=LSU rRNA
+AP017922.1      FIG     RNA     2160134 2163058 .       -       .       ID=fig|6666666.735992.rna.75;Name=LSU rRNA
+AP017922.1      FIG     RNA     2160134 2163058 .       -       .       ID=fig|6666666.735992.rna.75;Name=LSU rRNA
+AP017922.1      FIG     RNA     2163404 2164968 .       -       .       ID=fig|6666666.735992.rna.76;Name=SSU rRNA
+AP017922.1      FIG     RNA     2163404 2164968 .       -       .       ID=fig|6666666.735992.rna.76;Name=SSU rRNA
+AP017922.1      FIG     RNA     2163404 2164968 .       -       .       ID=fig|6666666.735992.rna.76;Name=SSU rRNA
+```
+¿Y si nos interesaran las 20 primeras líneas? Existe la opcion `-n` para indicarle en número de líneas que queremos que `head` o `tail` nos muetsren por pantalla.
+Intentalo en tu consola.
+```
+head -n20 Staphylococcus-aureus.gtf
+```
+Si has sido lo suficientemente observador, te habrás fijado en que la tercera columna de nuestro gtf indica el tipo de anotación o *features* (CDS, RNA, etc). Vamos a intentar contar cuantas anotaciones hay de cada tipo. Aquí, el filtro `cut` nos viene al pelo, ya que es ideal para trabajar con datos tabulados como nuestro gtf. `cut`, como su nombre indica, sirve para cortar los datos de nuestro fichero y sacar lo que nos interesa. En realidad, para que cut corte las columnas que nos interesan tenemos que indicarle la opcion `-f` y a continuacion (sin espacio) las columnas separadas por comas (1,2,3) o un rango de columnas (1-3).
+```
+cut -f1-3 Staphylococcus-aureus.gtf
+```
+Nos habrán aparecido en pantalla un monton de líneas. Sin embargo, lo que a nosotros nos interesa es el número que hay de cada *feature*
 ## 6. Pipelines
 ## 7. Filtros avanzados
 
