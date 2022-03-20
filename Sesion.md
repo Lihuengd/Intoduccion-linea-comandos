@@ -322,10 +322,10 @@ AP017922.1      FIG     CDS     2725060 2726937 .       -       1       ID=fig|6
 AP017922.1      FIG     CDS     2727004 2728383 .       -       1       ID=fig|6666666.735992.peg.2549;Name=tRNA-5-carboxymethylaminomethyl-2-thiouridine(34) synthesis protein MnmE
 AP017922.1      FIG     CDS     2728527 2728874 .       -       0       ID=fig|6666666.735992.peg.2550;Name=Ribonuclease P protein component (EC 3.1.26.5);Ontology_term=KEGG_ENZYME:3.1.26.5
 AP017922.1      FIG     CDS     2729001 2729138 .       -       0       ID=fig|6666666.735992.peg.2551;Name=LSU ribosomal protein L34p
-´´´
+```
 O si queremos verlo con mayor claridad, podemos usar la opción `-o` que mostrará sólo la parte de la línea que coincide con el patrón
 ```
- grep -E -o 'peg.[0-9]{0,9}' Staphylococcus-aureus.gtf | head
+grep -E -o 'peg.[0-9]{0,9}' Staphylococcus-aureus.gtf | head
 peg.1
 peg.2
 peg.3
