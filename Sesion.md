@@ -203,7 +203,7 @@ Por defecto, cut va a interpretar el tabulador como el separador por defecto de 
 Como orden complementaria a cut, existe paste. Esta orden toma una línea del fichero y le añade lo que queremos. Por ejemplo, para unir nuestros ficheros .bed horizontalmente usando un tabulador, haríamos:
 ```
 ```
-Pero bueno, no nos desviemos. Despues de ejecutar `cut -f2-3` os habrán aparecido en pantalla un montón de líneas. Sin embargo, lo que a nosotros nos interesa es el número que hay de cada *feature*. El filtro `uniq` nos ayudará, ya que su función es quitar ocurrencias repetidas, es decir, nos mostrará por pantalla sólo las líneas únicas. Además, con la opción -c nos contará cuántas veces aparece cada línea.
+Pero bueno, no nos desviemos. Después de ejecutar `cut -f2-3` os habrán aparecido en pantalla un montón de líneas. Sin embargo, lo que a nosotros nos interesa es el número que hay de cada *feature*. El filtro `uniq` nos ayudará, ya que su función es quitar ocurrencias repetidas, es decir, nos mostrará por pantalla sólo las líneas únicas. Además, con la opción -c nos contará cuántas veces aparece cada línea.
 ```
 cut -f2-3 Staphylococcus-aureus.gtf | uniq -c
       1 ##gff-version 3
