@@ -187,31 +187,40 @@ Intentalo en tu consola.
 ```
 head -n20 Staphylococcus-aureus.gtf
 ```
-Si has sido lo suficientemente observador, te habrás fijado en que la tercera columna de nuestro gtf indica el tipo de anotación o *features* (CDS, RNA, etc). Vamos a intentar contar cuantas anotaciones hay de cada tipo. Aquí, el filtro `cut` nos viene al pelo, ya que es ideal para trabajar con datos tabulados como nuestro gtf. `cut`, como su nombre indica, sirve para cortar los datos de nuestro fichero y sacar lo que nos interesa. En realidad, para que cut corte las columnas que nos interesan tenemos que indicarle la opcion `-f` y a continuacion (sin espacio) las columnas separadas por comas (1,2,3) o un rango de columnas (1-3).
+Si has sido lo suficientemente observador, te habrás fijado en que la tercera columna de nuestro gtf indica el tipo de anotación o *features* (CDS, RNA, etc). Vamos a intentar contar cuantas anotaciones hay de cada tipo. Aquí, el filtro `cut` nos viene al pelo, ya que es ideal para trabajar con datos tabulados como nuestro gtf. `cut`, como su nombre indica, sirve para cortar los datos de nuestro fichero y sacar lo que nos interesa. En realidad, para que cut corte las columnas que nos interesan tenemos que indicarle la opcion `-f` y a continuacion (sin espacio) las columnas separadas por comas (2,3) o un rango de columnas (2-3).
 ```
-cut -f1-3 Staphylococcus-aureus.gtf
+cut -f2-3 Staphylococcus-aureus.gtf
 ```
 Nos habrán aparecido en pantalla un monton de líneas. Sin embargo, lo que a nosotros nos interesa es el número que hay de cada *feature*. El filtro `uniq`nos ayudará, ya que su función es quitar ocurrencias repetidas, es decir, nos mostrará por pantalla sólo las líneas únicas. Además, con la opción -c nos contará cuántas veces aparece cada línea.
 ```
-cut -f1-3 Staphylococcus-aureus.gtf | uniq -c
+cut -f2-3 Staphylococcus-aureus.gtf | uniq -c
       1 ##gff-version 3
-   2551 AP017922.1      FIG     CDS
-      9 AP017922.1      FIG     tRNA
-     12 AP017922.1      FIG     RNA
-     24 AP017922.1      FIG     tRNA
-      3 AP017922.1      FIG     RNA
-      3 AP017922.1      FIG     tRNA
-      6 AP017922.1      FIG     RNA
-    114 AP017922.1      FIG     tRNA
-      6 AP017922.1      FIG     RNA
-      6 AP017922.1      FIG     tRNA
-     12 AP017922.1      FIG     RNA
-     24 AP017922.1      FIG     tRNA
-      9 AP017922.1      FIG     RNA
+   2551 FIG     CDS
+      9 FIG     tRNA
+     12 FIG     RNA
+     24 FIG     tRNA
+      3 FIG     RNA
+      3 FIG     tRNA
+      6 FIG     RNA
+    114 FIG     tRNA
+      6 FIG     RNA
+      6 FIG     tRNA
+     12 FIG     RNA
+     24 FIG     tRNA
+      9 FIG     RNA
 ```
 
 Como podeis ver, hemos introducido un símbolo nuevo (`|`), la barra vertical o pipe. Este símbolo tiene una función clave: pasar la salida de `cut` como entrada de `uniq`. En informática, la encadenación de funciones de diferentes órdenes para obtener un resultado final deseado se conoce como **pipeline** o tubería. 
+![pipeline](Imagenes/pipeline.png)
 
+Sin embargo, nuestra pipeline no cumple del todo la función que queríamos, ya que no nos presenta el recuento correctamente. Esto ocurre porque el filtro `uniq` es un poco limitado y sólo hará bien el recuento si los datos estan ordenados. 
+```
+$ cut -f2-3 Staphylococcus-aureus.gtf | sort | uniq -c
+      1 ##gff-version 3
+   2551 FIG     CDS
+     48 FIG     RNA
+    180 FIG     tRNA
+```
 ## 6. Filtros avanzados
 
 
