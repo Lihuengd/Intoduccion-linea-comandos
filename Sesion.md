@@ -261,4 +261,4 @@ grep -vc "^#" Staphylococcus-aureus.gtf
 2779
 ```
 **Las expresiones regulares**
-En este punto de la sesión, nos vemos obligados a hacer un alto en el camino para explicar qué son las expresiones regulares, ya que la potencia de `grep` se ve incrementada con el uso de expresiones regulares en sus patrones.
+En este punto de la sesión, nos vemos obligados a hacer un alto en el camino para explicar qué son las expresiones regulares, ya que la potencia de `grep` se ve incrementada con el uso de expresiones regulares en sus patrones. Las expresiones regulares no son más que secuencias de caractéres que especifican un patrón de búsqueda en un texto. Si quieres saber más, puedes visitar este [Link](https://en.wikipedia.org/wiki/Regular_expression#Standards).
