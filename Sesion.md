@@ -285,8 +285,8 @@ Existen muchos metacaracteres que podemos emplear para las expresiones regulares
 
 
 
-En los patornes con expresiones regulares también se pueden introducir rangos de caracteres, es decir, se puede indicar que case, por ejemplo, con todos los números comprendidos entre 1 y 100 o con las letras comprendidas entre a y m poniendo los caracteres entre corchetes y separados con un guión (`[1-100]` `[a-m]).
+En los patornes con expresiones regulares también se pueden introducir rangos de caracteres, es decir, se puede indicar que case, por ejemplo, con todos los números comprendidos entre 1 y 100 o con las letras comprendidas entre a y m poniendo los caracteres entre corchetes y separados con un guión (`[1-100]` `[a-m]`).
 
-PARA PROFUNDIZAR MÁS EN EL USO DE METACARACTERES CON GREP OS HE DEJADO UNA GUÍA MUY ÚTIL EN EL REPOSITORIO (REGEX Cheat Sheet.html) 
+PARA PROFUNDIZAR MÁS EN EL USO DE METACARACTERES CON GREP OS HE DEJADO UNA GUÍA MUY ÚTIL [AQUÍ](https://staff.washington.edu/weller/grep.html). 
 
 Vamos a ver algunos ejemplos de uso de expresiones regulares con `grep` para entendernos mejor:
