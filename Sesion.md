@@ -250,8 +250,15 @@ Un ejemplo sencillo sería, por ejemplo, buscar las palabras que contengan la le
 ```
 Las comillas para definir el patrón no son obligatorias, pero es mejor que acostumbres a hacerlo así, ya que si tuvieramos que buscar un patrón que contenga espacios, probablemente `grep` sepa interpretarlo bien.
 
-Como cualquier filtro, `grep` también dispone de opciones. Por ejemplo con la opción `-c` podemos contar las líneas en las que `grep` ha encontrado el patrón y con la opción `-v` le decimos que busque las líneas en las que NO aparece el patrón. Si observas bien nuestro fichero gtf tiene un encabezado `##gff-version 3`, que ha sido considerado como línea cuando ejecutabamos `wc -l`. En realidad, esto no nos interesa ya que el encabezado aporta más bien poco cuando queremos saber el número de anotaciónes que tenemos en el gtf. Vamos a contar ahora todas las líneas de nuestro fichero, sin tener en cuenta el encabezado:
+Como cualquier filtro, `grep` también dispone de opciones. Por ejemplo con la opción `-c` podemos contar las líneas en las que `grep` ha encontrado el patrón y con la opción `-v` le decimos que busque las líneas en las que NO aparece el patrón. Si observas bien nuestro fichero gtf tiene un encabezado `##gff-version 3`, que ha sido considerado como línea cuando ejecutabamos `wc -l`. 
 ```
-grep -vc
+wc -l Staphylococcus-aureus.gtf
+2780 Staphylococcus-aureus.gtf
 ```
-
+En realidad, esto no nos interesa ya que el encabezado aporta más bien poco cuando queremos saber el número de anotaciónes que tenemos en el gtf. Vamos a contar ahora todas las líneas de nuestro fichero, sin tener en cuenta el encabezado:
+```
+grep -vc "^#" Staphylococcus-aureus.gtf
+2779
+```
+**Las expresiones regulares**
+En este punto de la sesión, nos vemos obligados a hacer un alto en el camino para explicar qué son las expresiones regulares, ya que la potencia de `grep` se ve incrementada con el uso de expresiones regulares en sus patrones.
