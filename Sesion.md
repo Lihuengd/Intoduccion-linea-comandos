@@ -260,5 +260,23 @@ En realidad, esto no nos interesa ya que el encabezado aporta más bien poco cua
 grep -vc "^#" Staphylococcus-aureus.gtf
 2779
 ```
-**Las expresiones regulares**
-En este punto de la sesión, nos vemos obligados a hacer un alto en el camino para explicar qué son las expresiones regulares, ya que la potencia de `grep` se ve incrementada con el uso de expresiones regulares en sus patrones. Las expresiones regulares no son más que secuencias de caractéres que especifican un patrón de búsqueda en un texto. Si quieres saber más, puedes visitar este [Link](https://en.wikipedia.org/wiki/Regular_expression#Standards).
+
+En este punto de la sesión, nos vemos obligados a hacer un alto en el camino para explicar qué son las **expresiones regulares**, ya que la potencia de `grep` se ve incrementada con el uso de expresiones regulares en sus patrones. De hecho, `grep` viene de *global-regular-expression-print* Las expresiones regulares no son más que secuencias de caractéres que especifican un patrón de búsqueda en un texto. En realidad se llaman METACARACTERES. Si quieres saber más, puedes visitar este [Link](https://en.wikipedia.org/wiki/Regular_expression#Standards).
+
+Existen muchos metacaracteres que podemos emplear para las expresiones regulares. De hecho, nosotras ya hemos usado una en nuestro patrón `"^#"`. Este símbolo significa "líneas cuyo primer caracter sea #". Aquí te dejo algunas más:
+
+| Metacaracter(es) | Descripción                                                                                                                                                                                            |
+|------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| .                | Casa con exactamente un caracter                                                                                                                                                                             |
+| [ ]              | Casa con exactamente un caracter de una clase de caracteres (ver siguiente apartado)                                                                                                                                          |
+| ^                | Casa con el principio de una línea o palabra                                                                                                                                   |
+| \$                | Casa con el final de una línea o palabra                                                                                                                                                          |
+| *                | Casa con **cero o más** ocurrencias del caracter (o grupo de caracteres/expresiones) inmediatamente a la izquierda                                                                                                           |
+| ?                | Casa con **cero o una** ocurrencias del caracter (o grupo de caracteres/expresiones) inmediatamente a la izquierda                                                                                                            |
+| +                | Casa con **una o más** ocurrencias del caracter (o grupo de caracteres/expresiones) inmediatamente a la izquierda                                                                                                            |
+| {n}              | Casa **exactamente con n** ocurrencias del caracter (o grupo de caracteres/expresiones) inmediatamente a la izquierda                                                                                                                      |
+| {m,n}            | Casa **m a n** ocurrencias (intervalo cerrado) del caracter (o grupo de caracteres/expresiones) inmediatamente a la izquierda                                                                                                 |
+| \|               | Combina expresiones regulares con un OR                                                                                                                                                                 |
+| \                | Escapar metacaracteres. Se usa cuando se quiere casar con un metacaracter literalmente. Por ejemplo, `\.` casa con un punto, y `\?` casa con un símbolo de cierre de interrogación.                                                                   |
+| ( )              | Usado para agrupar caracteres en una única unidad, a los que se le podrán aplicar modificadores como `*` o `+`. También se usa para delimitar el alcance de una expresión OR (`|`), o en expresiones avanzadas para insertar reemplazos. |
+
