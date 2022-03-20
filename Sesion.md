@@ -154,7 +154,10 @@ En este repositorio disponeis de un archivo `Staphylococcus-aureus.gtf`. Vamos a
 ```
 less Staphylococcus-aureus.gtf
 ```
-Con `less` podemos inspeccionar cada línea del fichero, incluso hasta la última línea presionando enter. A estas alturas ya habrás podido comprobar el tamaño de nuestro fichero. Presiona "q" (*quit*) para salir de `less`. Otra opción cuando no queremos cargar todo el contenido de un fichero en nuestra pantalla es usar los filtros `head` y `tail` que mostrarán las 10 primeras y las 10 últimas líneas de nuestro fichero, respectivamente.
+Con `less` podemos inspeccionar cada línea del fichero, incluso hasta la última línea presionando enter. A estas alturas ya habrás podido comprobar el tamaño de nuestro fichero. Presiona "q" (*quit*) para salir de `less`. Podemos contar las líneas de un fihcero usando el filtro `wc` (*word-count*), el cual cuenta líneas, palabras y caracteres del fichero pasado como argumento.
+```
+```
+Otra opción cuando no queremos cargar todo el contenido de un fichero en nuestra pantalla es usar los filtros `head` y `tail` que mostrarán las 10 primeras y las 10 últimas líneas de nuestro fichero, respectivamente.
 ```
 head Staphylococcus-aureus.gtf
 ##gff-version 3
@@ -221,6 +224,8 @@ $ cut -f2-3 Staphylococcus-aureus.gtf | sort | uniq -c
      48 FIG     RNA
     180 FIG     tRNA
 ```
+
+¡Conseguido! Como veis, la combinacion de filtros puede sernos de mucha utilidad cuando inspeccionamos archivos procedentes de la secuenciación o anotación de genomas. Estos son sólo algunos filtros de los más usados
 ## 6. Filtros avanzados
 
 
