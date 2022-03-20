@@ -67,19 +67,19 @@ mkdir PRUEBA
 cp PRUEBA PRUEBA-copia
 ls
 ```
-El comando `mv` sirve para mover ficheros o directorios de una ubicación a otra. También acepta dos argumentos: el primero es la ruta del fichero/directorio que queremos mover y el segundo es la ruta destino, es decir, la nueva ubicación que queremos (incluyendo el nuevo nombre o el que ya tenía). Esta órden también se usa para cambiar el nombre a los ficheros o directorios.
+El comando `mv` sirve para mover ficheros o directorios de una ubicación a otra. También acepta dos argumentos: el primero es la ruta del fichero/directorio que queremos mover y el segundo es la ruta destino, es decir, la nueva ubicación que queremos (incluyendo el nuevo nombre o el que ya tenía). Esta orden también se usa para cambiar el nombre a los ficheros o directorios.
 ```
 ```
-**Cuidado**. Las acciones de copiar o mover cosas en nuestro sistema de ficheros son un arma de doble filo en UNIX, ya que no dispone de comprobación de sobreescritura. Esto conlleva la perdida de la información que teniamos antes en nuetsro fichero/directorio al sobreescribirse la nueva información. Si esto nos pasa, no habrá vuelta atrás. Lo mismo ocurre con la órden `rm`. UNIX no cuenta con una papelera a la que podamos recurrir si hemos borrado algo por error, asi que los ficheros que borremos con `rm` se pierden para siempre. 
+**Cuidado**. Las acciones de copiar o mover cosas en nuestro sistema de ficheros son un arma de doble filo en UNIX, ya que no dispone de comprobación de sobreescritura. Esto conlleva la pérdida de la información que teníamos antes en nuestro fichero/directorio al sobreescribirse la nueva información. Si esto nos pasa, no habrá vuelta atrás. Lo mismo ocurre con la órden `rm`. UNIX no cuenta con una papelera a la que podamos recurrir si hemos borrado algo por error, así que los ficheros que borremos con `rm` se pierden para siempre. 
 
-Una opción interesante de `cp` y `rm` es la opcion -r (*recursive*), que copiará o borrará de manera recursiva todos los contenidos de un directorio. Es útil, por ejemplo, cuando `rmdir` nos dice que el directorio no se ha podido borrar porque no esta vacío.
+Una opción interesante de `cp` y `rm` es la opcion -r (*recursive*), que copiará o borrará de manera recursiva todos los contenidos de un directorio. Es útil, por ejemplo, cuando `rmdir` nos dice que el directorio no se ha podido borrar porque no está vacío.
 ```
 ```
 
-Truquillos: autocompletado con el tabulador y acceso a comandos anteriores con las flechas
+Truquillos: autocompletado con el tabulador y acceso a comandos anteriores con las flechas.
 https://sospedia.net/shell-bash-gnulinux/ Link para ver más detalles sobre la navegación por el sistema de ficheros en Bash.
 ## 3. Redirección de entradas y salidas
-Hasta ahora hemos visto cómo darle una órden a Bash  y cómo este las ejecuta devilviendo su respuesta por pantalla (la salida estándar). De hecho, ahora mismo tendrás tu pantalla llena de cosas. Si en algún momento te agobias y quieres limpiar tu pantalla, teclea `clear` y obtendrás paz mental.
+Hasta ahora hemos visto cómo darle una orden a Bash  y cómo este las ejecuta devilviendo su respuesta por pantalla (la salida estándar). De hecho, ahora mismo tendrás tu pantalla llena de cosas. Si en algún momento te agobias y quieres limpiar tu pantalla, teclea `clear` y obtendrás paz mental.
 
 Como os decia, la pantalla es la "salida estandar", ya que, a no ser que le indiquemos lo contrario, Bash imprimirá por defecto el resultado en la pantalla. Por su parte, la entrada estándar es nuestro teclado. En Bash, podemos hacer que la salida y la entrada dejen de ser la estándar y sean, por ejemplo, un fichero que le indiquemos.
 ![Redireccion-entrada-salida](Imagenes/Redireccion-entrada-salida.png)
