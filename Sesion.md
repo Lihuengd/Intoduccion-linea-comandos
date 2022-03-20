@@ -79,19 +79,19 @@ Una opción interesante de `cp` y `rm` es la opcion -r (*recursive*), que copiar
 Truquillos: autocompletado con el tabulador y acceso a comandos anteriores con las flechas.
 https://sospedia.net/shell-bash-gnulinux/ Link para ver más detalles sobre la navegación por el sistema de ficheros en Bash.
 ## 3. Redirección de entradas y salidas
-Hasta ahora hemos visto cómo darle una orden a Bash  y cómo este las ejecuta devilviendo su respuesta por pantalla (la salida estándar). De hecho, ahora mismo tendrás tu pantalla llena de cosas. Si en algún momento te agobias y quieres limpiar tu pantalla, teclea `clear` y obtendrás paz mental.
+Hasta ahora hemos visto cómo darle una orden a Bash  y cómo este las ejecuta devolviendo su respuesta por pantalla (la salida estándar). De hecho, ahora mismo tendrás tu pantalla llena de cosas. Si en algún momento te agobias y quieres limpiar tu pantalla, teclea `clear` y obtendrás paz mental.
 
-Como os decia, la pantalla es la "salida estandar", ya que, a no ser que le indiquemos lo contrario, Bash imprimirá por defecto el resultado en la pantalla. Por su parte, la entrada estándar es nuestro teclado. En Bash, podemos hacer que la salida y la entrada dejen de ser la estándar y sean, por ejemplo, un fichero que le indiquemos.
+Como os decía, la pantalla es la "salida estándar", ya que, a no ser que le indiquemos lo contrario, Bash imprimirá por defecto el resultado en la pantalla. Por su parte, la entrada estándar es nuestro teclado. En Bash, podemos hacer que la salida y la entrada dejen de ser la estándar y sean, por ejemplo, un fichero que le indiquemos.
 ![Redireccion-entrada-salida](Imagenes/Redireccion-entrada-salida.png)
-Pongámoslo en práctica. Imaginemos que queremos guardar el resultado de la órden `ls` en un fichero para consultarlo más tarde. Basta con redirigir el resultado de `ls` a un fichero de texto nuevo con el símbolo mayor que (>). 
+Pongámoslo en práctica. Imaginemos que queremos guardar el resultado de la orden `ls` en un fichero para consultarlo más tarde. Basta con redirigir el resultado de `ls` a un fichero de texto nuevo con el símbolo 'mayor que' (>). 
 ```
 ls > fichero-nuevo.txt
 ```
-En este caso, se creará un fichero nuevo con el resultado de `ls`. Si el archivo fichero-nuevo.txt estuviera creado ya, lo que estaríamos haciendo es sobreescribirlo, es decir, borrar todo su contenido y escribir el contenido nuevo. Si lo que queremos es añadir el resultado de `ls` a algo que ya tenemos escrito en un fichero debemos redirigir la esalida con una doble símbolo mayor que (>>). Vamos a probar añadir el resultado de un nuevo comando (`date`) al contenido del fichero-nuevo.txt. 
+En este caso, se creará un fichero nuevo con el resultado de `ls`. Si el archivo fichero-nuevo.txt estuviera creado ya, lo que estaríamos haciendo es sobreescribirlo, es decir, borrar todo su contenido y escribir el contenido nuevo. Si lo que queremos es añadir el resultado de `ls` a algo que ya tenemos escrito en un fichero, debemos redirigir la salida con una doble símbolo mayor que (>>). Vamos a probar añadiendo el resultado de un nuevo comando (`date`) al contenido del fichero-nuevo.txt. 
 ```
 date >> fichero-nuevo.txt
 ```
-¿Sabríais decirme qué hace `date`? Para ello, tendríamos que ver lo que hay dentro de nuestro fichero-nuevo.txt. Esto lo harémos con la órden `cat` (*con-cat-enate*), que mostrará por pantalla todo el contenido de nuestro fichero.
+¿Sabríais decirme qué hace `date`? Para ello, tendríamos que ver lo que hay dentro de nuestro fichero-nuevo.txt. Esto lo haremos con la orden `cat` (*con-cat-enate*), que mostrará por pantalla todo el contenido de nuestro fichero.
 ```
 cat fichero-nuevo.txt
 ```
