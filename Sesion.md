@@ -210,7 +210,7 @@ cut -f1-3 Staphylococcus-aureus.gtf | uniq -c
       9 AP017922.1      FIG     RNA
 ```
 
-Como podeis ver, hemos introducido un símbolo nuevo (`|`), la barra o pipe. Este símbolo tiene una función clave: pasar la salida de `cut` como entrada de `uniq`. En informática, la encadenación de funciones de diferentes órdenes para obtener un resultado final deseado se conoce como **pipeline** o tubería. 
+Como podeis ver, hemos introducido un símbolo nuevo (`|`), la barra vertical o pipe. Este símbolo tiene una función clave: pasar la salida de `cut` como entrada de `uniq`. En informática, la encadenación de funciones de diferentes órdenes para obtener un resultado final deseado se conoce como **pipeline** o tubería. 
 
 ## 6. Filtros avanzados
 
