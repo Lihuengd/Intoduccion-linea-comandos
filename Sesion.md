@@ -242,3 +242,16 @@ Hasta ahora hemos visto filtros con funciones bastante simples. En este apartado
 `grep` es el filtro por exelencia para trabajar en línea de comandos con Bash. Llega a ser hasta 5 veces más rápido que cualquier otro filtro o cualquier otra herramienta de búsqueda parecida que podamos escribir en Python o en R, por ejemplo. Esta rapidez de acción se debe a que `grep` esta diseñada específicamente para cumplir una sola función muy muy bien: buscar en un fichero las **líneas** que casan con un **patrón**.
 
 Así `grep` recibe dos argumentos obligatorios:
+- El patrón a buscar (cadena o expresión regular)
+- El fichero o ficheros donde queremos que busque el patrón
+
+Un ejemplo sencillo sería, por ejemplo, buscar las palabras que contengan la letra V en nuestro archivo dias-de-la-semana.txt:
+```
+```
+Las comillas para definir el patrón no son obligatorias, pero es mejor que acostumbres a hacerlo así, ya que si tuvieramos que buscar un patrón que contenga espacios, probablemente `grep` sepa interpretarlo bien.
+
+Como cualquier filtro, `grep` también dispone de opciones. Por ejemplo con la opción `-c` podemos contar las líneas en las que `grep` ha encontrado el patrón y con la opción `-v` le decimos que busque las líneas en las que NO aparece el patrón. Si observas bien nuestro fichero gtf tiene un encabezado `##gff-version 3`, que ha sido considerado como línea cuando ejecutabamos `wc -l`. En realidad, esto no nos interesa ya que el encabezado aporta más bien poco cuando queremos saber el número de anotaciónes que tenemos en el gtf. Vamos a contar ahora todas las líneas de nuestro fichero, sin tener en cuenta el encabezado:
+```
+grep -vc
+```
+
