@@ -134,6 +134,7 @@ Sin embargo, `cat` es bastante rudimentario y limitado. Por ejemplo, no me dejar
 ```
 nano fichero-nuevo2.txt
 ```
+PARA EMPEZAR A USAR NANO OS DEJO EN EL REPOSITORIO UNA CHULETILLA QUE AYUDARÁ (chuleta-gnu-nano.pdf)
 
 ## 5. Filtros básicos y pipelines
 Además de para leer y crear ficheros de texto, `cat` se podría considerar el **filtro** más simple de Bash, ya que no hace nada con la información que le pasamos, la deja como estaba. Existen otros filtros muy útiles y que usaremos muy amenudo. Como su propio nombre indica, estos comandos filtran la información que se les pasa por la entrada y devuelven lo que nos interesa. Por ejemplo, el filtro `sort` ordena todas las líneas de un fichero. Vamos a usarlo con nuestro fichero dias-de-la-semana.txt.
@@ -238,7 +239,7 @@ $ cut -f2-3 Staphylococcus-aureus.gtf | sort | uniq -c
 ## 6. Filtros avanzados
 Hasta ahora hemos visto filtros con funciones bastante simples. En este apartado veremos tres filtros con funciones un poco más complejas: `grep`, `awk` y `sed`.
 
-**grep**
+### grep
 `grep` es el filtro por exelencia para trabajar en línea de comandos con Bash. Llega a ser hasta 5 veces más rápido que cualquier otro filtro o cualquier otra herramienta de búsqueda parecida que podamos escribir en Python o en R, por ejemplo. Esta rapidez de acción se debe a que `grep` esta diseñada específicamente para cumplir una sola función muy muy bien: buscar en un fichero las **líneas** que casan con un **patrón**.
 
 Así `grep` recibe dos argumentos obligatorios:
@@ -261,6 +262,8 @@ grep -vc "^#" Staphylococcus-aureus.gtf
 2779
 ```
 
+**EXPRESIONES REGULARES**
+
 En este punto de la sesión, nos vemos obligados a hacer un alto en el camino para explicar qué son las **expresiones regulares**, ya que la potencia de `grep` se ve incrementada con el uso de expresiones regulares en sus patrones. De hecho, `grep` viene de *global-regular-expression-print* Las expresiones regulares no son más que secuencias de caractéres que especifican un patrón de búsqueda en un texto. En realidad se llaman METACARACTERES. Si quieres saber más, puedes visitar este [Link](https://en.wikipedia.org/wiki/Regular_expression#Standards).
 
 Existen muchos metacaracteres que podemos emplear para las expresiones regulares. De hecho, nosotras ya hemos usado una en nuestro patrón `"^#"`. Este símbolo significa "líneas cuyo primer caracter sea #". Aquí te dejo algunas más:
@@ -268,7 +271,7 @@ Existen muchos metacaracteres que podemos emplear para las expresiones regulares
 | Metacaracter(es) | Descripción                                                                                                                                                                                            |
 |------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | .                | Casa con exactamente un caracter                                                                                                                                                                             |
-| [ ]              | Casa con exactamente un caracter de una clase de caracteres (ver siguiente apartado)                                                                                                                                          |
+| [ ]              | Casa con exactamente un caracter de una clase de caracteres                                                                                                                                          |
 | ^                | Casa con el principio de una línea o palabra                                                                                                                                   |
 | \$                | Casa con el final de una línea o palabra                                                                                                                                                          |
 | *                | Casa con **cero o más** ocurrencias del caracter (o grupo de caracteres/expresiones) inmediatamente a la izquierda                                                                                                           |
@@ -280,3 +283,10 @@ Existen muchos metacaracteres que podemos emplear para las expresiones regulares
 | \                | Escapar metacaracteres. Se usa cuando se quiere casar con un metacaracter literalmente. Por ejemplo, `\.` casa con un punto, y `\?` casa con un símbolo de cierre de interrogación.                                                                   |
 | ( )              | Usado para agrupar caracteres en una única unidad, a los que se le podrán aplicar modificadores como `*` o `+`. También se usa para delimitar el alcance de una expresión OR (`|`), o en expresiones avanzadas para insertar reemplazos. |
 
+
+
+En los patornes con expresiones regulares también se pueden introducir rangos de caracteres, es decir, se puede indicar que case, por ejemplo, con todos los números comprendidos entre 1 y 100 o con las letras comprendidas entre a y m poniendo los caracteres entre corchetes y separados con un guión (`[1-100]` `[a-m]).
+
+PARA PROFUNDIZAR MÁS EN EL USO DE METACARACTERES CON GREP OS HE DEJADO UNA GUÍA MUY ÚTIL EN EL REPOSITORIO (REGEX Cheat Sheet.html) 
+
+Vamos a ver algunos ejemplos de uso de expresiones regulares con `grep` para entendernos mejor:
