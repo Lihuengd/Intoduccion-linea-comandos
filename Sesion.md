@@ -153,7 +153,7 @@ viernes
 ```
 Hasta ahora, los filtros no parecen tener mucha utilidad, esto podríamos hacerlo perfectamente en una hoja de cálculo o en un editor de texto. Sin embargo, cuando trabajamos con información derivada de la secuenciacion de ADN, solemos trabajar con archivos muy grandes y pesados que tardan en abrirse y hasta la operación más simple como ordenar sus filas sería un dolor. Así que a partir de ahora vamos a trabajar con un ficheros reales. 
 
-En este repositorio disponeis de un archivo `Staphylococcus-aureus.gtf`. Vamos a inspeccionar este fichero con la órden `less` que tiene la vemtaja de no cargar todo el contenido del fichero en la memoria para mostrarlo, lo que lo hace muy eficiente en memoria. 
+En este repositorio disponéis de un archivo `Staphylococcus-aureus.gtf`. Vamos a inspeccionar este fichero con la orden `less` que tiene la vemtaja de no cargar todo el contenido del fichero en la memoria para mostrarlo, lo que lo hace muy eficiente en memoria. 
 ```
 less Staphylococcus-aureus.gtf
 ```
@@ -188,22 +188,22 @@ AP017922.1      FIG     RNA     2163404 2164968 .       -       .       ID=fig|6
 AP017922.1      FIG     RNA     2163404 2164968 .       -       .       ID=fig|6666666.735992.rna.76;Name=SSU rRNA
 AP017922.1      FIG     RNA     2163404 2164968 .       -       .       ID=fig|6666666.735992.rna.76;Name=SSU rRNA
 ```
-¿Y si nos interesaran las 20 primeras líneas? Existe la opcion `-n` para indicarle en número de líneas que queremos que `head` o `tail` nos muetsren por pantalla.
-Intentalo en tu consola.
+¿Y si nos interesaran las 20 primeras líneas? Existe la opcion `-n` para indicarle en número de líneas que queremos que `head` o `tail` nos muestren por pantalla.
+Inténtalo en tu consola.
 ```
 head -n20 Staphylococcus-aureus.gtf
 ```
-Si has sido lo suficientemente observador, te habrás fijado en que la tercera columna de nuestro gtf indica el tipo de anotación o *features* (CDS, RNA, etc). Vamos a intentar contar cuantas anotaciones hay de cada tipo. Aquí, el filtro `cut` nos viene al pelo, ya que es ideal para trabajar con datos tabulados como nuestro gtf. `cut`, como su nombre indica, sirve para cortar los datos de nuestro fichero y sacar lo que nos interesa. En realidad, para que cut corte las columnas que nos interesan tenemos que indicarle la opcion `-f` y a continuacion (sin espacio) las columnas separadas por comas (2,3) o un rango de columnas (2-3).
+Si has sido lo suficientemente observador, te habrás fijado en que la tercera columna de nuestro gtf indica el tipo de anotación o *features* (CDS, RNA, etc). Vamos a intentar contar cuántas anotaciones hay de cada tipo. Aquí, el filtro `cut` nos viene al pelo, ya que es ideal para trabajar con datos tabulados como nuestro gtf. `cut`, como su nombre indica, sirve para cortar los datos de nuestro fichero y sacar lo que nos interesa. En realidad, para que cut corte las columnas que nos interesan tenemos que indicarle la opcion `-f` y a continuación (sin espacio) las columnas separadas por comas (2,3) o un rango de columnas (2-3).
 ```
 cut -f2-3 Staphylococcus-aureus.gtf
 ```
 Por defecto, cut va a interpretar el tabulador como el separador por defecto de nuestros datos. Pero podemos especificar el que queramos con la opción -d. Aquí va un ejemplo sencillo:
 ```
 ```
-Como orden complementaria a cut, existe paste. Esta orden toma una línea del fichero y le añade lo que queremos, por ejemplo, para unir nuestros ficheros .bed horizontalmente usando un tabulador, haríamos:
+Como orden complementaria a cut, existe paste. Esta orden toma una línea del fichero y le añade lo que queremos. Por ejemplo, para unir nuestros ficheros .bed horizontalmente usando un tabulador, haríamos:
 ```
 ```
-Pero bueno, no nos desviemos. Despues de ejecutar `cut -f2-3` os habrán aparecido en pantalla un monton de líneas. Sin embargo, lo que a nosotros nos interesa es el número que hay de cada *feature*. El filtro `uniq`nos ayudará, ya que su función es quitar ocurrencias repetidas, es decir, nos mostrará por pantalla sólo las líneas únicas. Además, con la opción -c nos contará cuántas veces aparece cada línea.
+Pero bueno, no nos desviemos. Despues de ejecutar `cut -f2-3` os habrán aparecido en pantalla un montón de líneas. Sin embargo, lo que a nosotros nos interesa es el número que hay de cada *feature*. El filtro `uniq` nos ayudará, ya que su función es quitar ocurrencias repetidas, es decir, nos mostrará por pantalla sólo las líneas únicas. Además, con la opción -c nos contará cuántas veces aparece cada línea.
 ```
 cut -f2-3 Staphylococcus-aureus.gtf | uniq -c
       1 ##gff-version 3
@@ -222,7 +222,7 @@ cut -f2-3 Staphylococcus-aureus.gtf | uniq -c
       9 FIG     RNA
 ```
 
-Como podeis ver, hemos introducido un símbolo nuevo (`|`), la barra vertical o pipe. Este símbolo tiene una función clave: pasar la salida de `cut` como entrada de `uniq`. En informática, la encadenación de funciones de diferentes órdenes para obtener un resultado final deseado se conoce como **pipeline** o tubería. 
+Como podéis ver, hemos introducido un símbolo nuevo (`|`), la barra vertical o pipe. Este símbolo tiene una función clave: pasar la salida de `cut` como entrada de `uniq`. En informática, la encadenación de funciones de diferentes órdenes para obtener un resultado final deseado se conoce como **pipeline** o tubería. 
 ![pipeline](Imagenes/pipeline.png)
 
 Sin embargo, nuestra pipeline no cumple del todo la función que queríamos, ya que no nos presenta el recuento correctamente. Esto ocurre porque el filtro `uniq` es un poco limitado y sólo hará bien el recuento si los datos estan ordenados. 
@@ -240,18 +240,18 @@ $ cut -f2-3 Staphylococcus-aureus.gtf | sort | uniq -c
 Hasta ahora hemos visto filtros con funciones bastante simples. En este apartado veremos tres filtros con funciones un poco más complejas: `grep`, `awk` y `sed`.
 
 ### grep
-`grep` es el filtro por exelencia para trabajar en línea de comandos con Bash. Llega a ser hasta 5 veces más rápido que cualquier otro filtro o cualquier otra herramienta de búsqueda parecida que podamos escribir en Python o en R, por ejemplo. Esta rapidez de acción se debe a que `grep` esta diseñada específicamente para cumplir una sola función muy muy bien: buscar en un fichero las **líneas** que casan con un **patrón**.
+`grep` es el filtro por exelencia para trabajar en línea de comandos con Bash. Llega a ser hasta 5 veces más rápido que cualquier otro filtro o cualquier otra herramienta de búsqueda parecida que podamos escribir en Python o en R, por ejemplo. Esta rapidez de acción se debe a que `grep` está diseñada específicamente para cumplir una sola función muy muy bien: buscar en un fichero las **líneas** que casan con un **patrón**.
 
 Así `grep` recibe dos argumentos obligatorios:
-- El patrón a buscar (cadena o expresión regular)
-- El fichero o ficheros donde queremos que busque el patrón
+- El patrón a buscar (cadena o expresión regular).
+- El fichero o ficheros donde queremos que busque el patrón.
 
 Un ejemplo sencillo sería, por ejemplo, buscar las palabras que contengan la letra V en nuestro archivo dias-de-la-semana.txt:
 ```
 ```
-Las comillas para definir el patrón no son obligatorias, pero es mejor que acostumbres a hacerlo así, ya que si tuvieramos que buscar un patrón que contenga espacios, probablemente `grep` sepa interpretarlo bien.
+Las comillas para definir el patrón no son obligatorias, pero es mejor que acostumbres a hacerlo así, ya que si tenemos que buscar un patrón que contenga espacios, probablemente `grep` sepa interpretarlo bien.
 
-Como cualquier filtro, `grep` también dispone de opciones. Por ejemplo con la opción `-c` podemos contar las líneas en las que `grep` ha encontrado el patrón y con la opción `-v` le decimos que busque las líneas en las que NO aparece el patrón. Si observas bien nuestro fichero gtf tiene un encabezado `##gff-version 3`, que ha sido considerado como línea cuando ejecutabamos `wc -l`. 
+Como cualquier filtro, `grep` también dispone de opciones. Por ejemplo, con la opción `-c` podemos contar las líneas en las que `grep` ha encontrado el patrón y con la opción `-v` le decimos que busque las líneas en las que NO aparece el patrón. Si observas bien nuestro fichero gtf tiene un encabezado `##gff-version 3`, que ha sido considerado como línea cuando ejecutabamos `wc -l`. 
 ```
 wc -l Staphylococcus-aureus.gtf
 2780 Staphylococcus-aureus.gtf
@@ -264,9 +264,9 @@ grep -vc "^#" Staphylococcus-aureus.gtf
 
 **EXPRESIONES REGULARES**
 
-En este punto de la sesión, nos vemos obligados a hacer un alto en el camino para explicar qué son las **expresiones regulares**, ya que la potencia de `grep` se ve incrementada con el uso de expresiones regulares en sus patrones. De hecho, `grep` viene de *global-regular-expression-print* Las expresiones regulares no son más que secuencias de caractéres que especifican un patrón de búsqueda en un texto. En realidad se llaman METACARACTERES. Si quieres saber más, puedes visitar este [Link](https://en.wikipedia.org/wiki/Regular_expression#Standards).
+En este punto de la sesión, nos vemos obligados a hacer un alto en el camino para explicar qué son las **expresiones regulares**, ya que la potencia de `grep` se ve incrementada con el uso de expresiones regulares en sus patrones. De hecho, `grep` viene de *global-regular-expression-print* . Las expresiones regulares no son más que secuencias de caractéres que especifican un patrón de búsqueda en un texto. En realidad se llaman METACARACTERES. Si quieres saber más, puedes visitar este [Link](https://en.wikipedia.org/wiki/Regular_expression#Standards).
 
-Existen muchos metacaracteres que podemos emplear para las expresiones regulares. De hecho, nosotras ya hemos usado una en nuestro patrón `"^#"`. Este símbolo significa "líneas cuyo primer caracter sea #". Aquí te dejo algunas más:
+Existen muchos metacaracteres que podemos emplear para las expresiones regulares. De hecho, nosotras ya hemos usado una en nuestro patrón `"^#"`. Este símbolo significa "líneas cuyo primer carácter sea #". Aquí te dejo algunas más:
 
 | Metacaracter(es) | Descripción                                                                                                                                                                                            |
 |------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
