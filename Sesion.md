@@ -289,4 +289,66 @@ En los patornes con expresiones regulares también se pueden introducir rangos d
 
 PARA PROFUNDIZAR MÁS EN EL USO DE METACARACTERES CON GREP OS HE DEJADO UNA GUÍA MUY ÚTIL [AQUÍ](https://staff.washington.edu/weller/grep.html). 
 
-Vamos a ver algunos ejemplos de uso de expresiones regulares con `grep` para entendernos mejor:
+Vamos a ver un ejemplo de uso de expresiones regulares con `grep` para entendernos mejor. Cuando hiciste `head` y `tail` sobre el gtf, también pudiste observar que aquellas anotaciones correspondientes a CDS tenian un id.peg, mientras que las anotaciones de RNA o tRNA tienen un id.rna. Imaginemos que queremos contar todas las anotaciones con id.peg en nuestro gtf para comprobar que efectivamente coincide con el recuento de CDS que hicimos anteriormente. Con grep podría ser algo así:
+```
+grep -E -c 'peg.[0-9]{0,9}' Staphylococcus-aureus.gtf
+2551
+```
+Para explicar este ejemplo, iremos paso por paso. Primero analizamos las opciones utilizadas. En este caso he usado la opción `-c` para contar las líneas que coinciden con el patrón (ya la hemos visto) y la opción -E para que grep entienda que le voy a pasar una Expresión Regular Extendida (EREs). Existen las Expresiones Regulares Básicas (BREs), que son las que entiende `grep` por defecto y se limitan a unos pocos metacaracteres (`^`, `$`, `.` y `*`), y existen las EREs que son más modernas y admiten más metacaracteres y nos dan mucho más juego. Como `grep` fue diseñada para BREs, tenemos que indicarle con la opción -E que vamos a usar EREs en nuestro patron.
+
+Por su parte, el patrón `peg.[0-9]{0,9}` le dice a grep que busque líneas que casen con "peg." seguidas de un número comprendido ente 0 y 9 y que esos numeros pueden repetirse de 0 a 9 veces, es decir, que busque todas las combinaciones posibles de números. En definitiva, todos los números o, dicho correctamente, todos los peg que hay en nuestras anotaciones. Podemos comprobarlo obserbando las primeras y ultimas lineas:
+```
+grep -E 'peg.[0-9]{0,9}' Staphylococcus-aureus.gtf | head
+AP017922.1      FIG     CDS     517     1878    .       +       1       ID=fig|6666666.735992.peg.1;Name=Chromosomal replication initiator protein DnaA
+AP017922.1      FIG     CDS     2155    3288    .       +       1       ID=fig|6666666.735992.peg.2;Name=DNA polymerase III beta subunit (EC 2.7.7.7);Ontology_term=KEGG_ENZYME:2.7.7.7
+AP017922.1      FIG     CDS     3678    3914    .       +       0       ID=fig|6666666.735992.peg.3;Name=Uncharacterized S4 RNA-binding-domain protein YbcJ
+AP017922.1      FIG     CDS     3911    5023    .       +       2       ID=fig|6666666.735992.peg.4;Name=DNA recombination and repair protein RecF
+AP017922.1      FIG     CDS     5033    6967    .       +       2       ID=fig|6666666.735992.peg.5;Name=DNA gyrase subunit B (EC 5.99.1.3);Ontology_term=KEGG_ENZYME:5.99.1.3
+AP017922.1      FIG     CDS     7004    9664    .       +       2       ID=fig|6666666.735992.peg.6;Name=DNA gyrase subunit A (EC 5.99.1.3);Ontology_term=KEGG_ENZYME:5.99.1.3
+AP017922.1      FIG     CDS     9750    10562   .       -       0       ID=fig|6666666.735992.peg.7;Name=ADP-dependent (S)-NAD(P)H-hydrate dehydratase (EC 4.2.1.136);Ontology_term=KEGG_ENZYME:4.2.1.136
+AP017922.1      FIG     CDS     10887   11114   .       +       0       ID=fig|6666666.735992.peg.8;Name=Histidine ammonia-lyase (EC 4.3.1.3);Ontology_term=KEGG_ENZYME:4.3.1.3
+AP017922.1      FIG     CDS     11115   12401   .       +       0       ID=fig|6666666.735992.peg.9;Name=Histidine ammonia-lyase (EC 4.3.1.3);Ontology_term=KEGG_ENZYME:4.3.1.3
+AP017922.1      FIG     CDS     12779   14065   .       +       2       ID=fig|6666666.735992.peg.10;Name=Seryl-tRNA synthetase (EC 6.1.1.11);Ontology_term=KEGG_ENZYME:6.1.1.11
+```
+```
+grep -E 'peg.[0-9]{0,9}' Staphylococcus-aureus.gtf | tail
+AP017922.1      FIG     CDS     2721000 2721200 .       +       0       ID=fig|6666666.735992.peg.2542;Name=Cold shock protein of CSP family
+AP017922.1      FIG     CDS     2721318 2721887 .       -       0       ID=fig|6666666.735992.peg.2543;Name=Transcriptional regulator%2C Xre family
+AP017922.1      FIG     CDS     2722147 2722542 .       -       1       ID=fig|6666666.735992.peg.2544;Name=hypothetical protein
+AP017922.1      FIG     CDS     2722610 2722963 .       -       2       ID=fig|6666666.735992.peg.2545;Name=hypothetical protein
+AP017922.1      FIG     CDS     2723459 2724298 .       -       2       ID=fig|6666666.735992.peg.2546;Name=Chromosome (plasmid) partitioning protein ParB-2
+AP017922.1      FIG     CDS     2724341 2725060 .       -       2       ID=fig|6666666.735992.peg.2547;Name=16S rRNA (guanine(527)-N(7))-methyltransferase (EC 2.1.1.170);Ontology_term=KEGG_ENZYME:2.1.1.170
+AP017922.1      FIG     CDS     2725060 2726937 .       -       1       ID=fig|6666666.735992.peg.2548;Name=tRNA-5-carboxymethylaminomethyl-2-thiouridine(34) synthesis protein MnmG
+AP017922.1      FIG     CDS     2727004 2728383 .       -       1       ID=fig|6666666.735992.peg.2549;Name=tRNA-5-carboxymethylaminomethyl-2-thiouridine(34) synthesis protein MnmE
+AP017922.1      FIG     CDS     2728527 2728874 .       -       0       ID=fig|6666666.735992.peg.2550;Name=Ribonuclease P protein component (EC 3.1.26.5);Ontology_term=KEGG_ENZYME:3.1.26.5
+AP017922.1      FIG     CDS     2729001 2729138 .       -       0       ID=fig|6666666.735992.peg.2551;Name=LSU ribosomal protein L34p
+´´´
+O si queremos verlo con mayor claridad, podemos usar la opción `-o` que mostrará sólo la parte de la línea que coincide con el patrón
+```
+ grep -E -o 'peg.[0-9]{0,9}' Staphylococcus-aureus.gtf | head
+peg.1
+peg.2
+peg.3
+peg.4
+peg.5
+peg.6
+peg.7
+peg.8
+peg.9
+peg.10
+```
+```
+grep -E -o 'peg.[0-9]{0,9}' Staphylococcus-aureus.gtf | tail
+peg.2542
+peg.2543
+peg.2544
+peg.2545
+peg.2546
+peg.2547
+peg.2548
+peg.2549
+peg.2550
+peg.2551
+```
+
+
