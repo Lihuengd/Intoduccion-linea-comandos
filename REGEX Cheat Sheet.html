@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)https://staff.washington.edu/weller/grep.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<title>REGEX Cheat Sheet</title>
+
+<link rel="stylesheet" type="text/css" href="./REGEX Cheat Sheet_files/main.css">
+<style>
+body {
+	min-width: 725px;
+	}
+body,
+pre,
+code {
+	font: 11px/16px verdana, "trebuchet ms", arial, helvetica, FreeSans, sans-serif;
+	}
+pre,
+code { 
+	padding: 1px 3px;
+	border: 1px solid #c8c0b0;
+	background: #fcfcf2;
+	color: #222;
+	}
+h4 {
+	clear: both;
+	margin-top: 2em;
+	}
+.floatL { 
+	float: left; 
+	margin-right: 10px; 
+	}
+.floatR { 
+	float: right; 
+	margin-left: 10px;
+	}
+.clear { clear: both; }
+
+.regex { 
+	color: black; 
+	background: #c8efe0;
+	padding: 0 .25em; 
+	}
+ul {
+	list-style: none;
+	margin-left: 0;
+	padding-left: 0;
+	}
+dl {
+	padding: 0px;
+	margin: 0;
+	}
+dl.borderL {
+	border-left: 1px solid #ede7cd;
+	padding-left: 10px;
+	margin-left: 45%;
+	}
+dl.floatL {
+	width: 45%;
+	}
+dt,
+dd,
+li {
+		line-height: 1.7em;
+	}
+dt { 
+	font-weight: bold; 
+	margin-top: 1em; 
+	}
+dd,
+li { 
+	padding: 0; 
+	margin-left: 1.5em; 
+	}
+dt b, 
+dd b,
+li b,
+code b {
+	color: #a00; 
+/*	font: bold .9em verdana, arial, helvetica, FreeSans; */
+	}
+dd i { 
+	color: #b80; 
+	font-weight: bold; 
+	font-style: normal; }
+dd p {
+	padding-left: 1em; 
+	margin: 0; }
+dl+p { /* adjacent sybling */
+	margin-top: 1em;
+	}
+@media print { 
+	dl.borderL {
+		border-left: 1px dotted #666;
+		}
+	dt b,
+	dd b
+	 {
+		color: #000;
+		}
+}
+</style>
+</head>
+
+
+<body>
+
+<h1>GREP cheat sheet</h1>
+
+<dl class="floatL">
+<dt class="notop">characters — what to seek</dt>
+<dd><b>ring</b> &nbsp; matches <i>ring</i>, sp<i>ring</i>board, <i>ring</i>tone, etc.</dd>
+<dd><b>.</b> &nbsp; matches almost any character 
+	<p><b>h.o</b> &nbsp; matches <i>hoo</i>, <i>h2o</i>, <i>h/o</i>, etc.</p>
+</dd>
+<dd>Use <b>\</b> to search for these special characters:<p><b>[ \ ^ $ . | ? * + ( ) { }</b></p>
+	<p>ring<b>\?</b> &nbsp; matches <i>ring?</i></p>
+	<p><b>\(</b>quiet<b>\)</b> &nbsp; matches <i>(quiet)</i></p>
+	<p>c:<b>\\</b>windows &nbsp; matches <i>c:\windows</i></p> 
+</dd>
+
+<dt>alternatives — <b>|</b> &nbsp; (OR)</dt>
+<dd><b>cat|dog</b> &nbsp; match <i>cat</i> or <i>dog</i></dd>
+<dd>order matters if short alternative is part of longer</dd>
+<dd><b>id|identity</b> &nbsp; matches <i>id</i> or <i>id</i>entity
+<p>regex engine is "eager", stops comparing <br>
+as soon as 1st alternative matches </p>
+</dd>
+<dd><b>identity|id</b> &nbsp; matches <i>id</i> or <i>identity</i></dd>
+<dd>order longer to shorter when alternatives overlap</dd>
+<dd>(To match whole words, see scope and groups.)</dd>
+
+
+<dt>character classes — <b>[</b>allowed<b>]</b> or <b>[^</b>NOT allowed<b>]</b></dt>
+<dd><b>[aeiou]</b> &nbsp; match any vowel</dd>
+<dd><b>[^aeiou]</b> &nbsp; match a NON vowel</dd>
+<dd>r<b>[iau]</b>ng &nbsp; match <i>ring</i>, w<i>rang</i>le, sp<i>rung</i>, etc.</dd>
+<dd>gr<b>[ae]</b>y &nbsp; match <i>gray</i> or <i>grey</i></dd>
+<dd><b>[a-zA-Z0-9]</b> &nbsp; match any letter or digit</dd>
+<dd>(In <b>[ ]</b> always escape <b>. \ ]</b> and sometimes <b>^ -</b> .)</dd>
+
+<dt>shorthand classes</dt>
+<dd><b>\w</b> &nbsp; "word" character (letter, digit, or underscore)</dd>
+<dd><b>\d</b> &nbsp; digit 
+</dd><dd><b>\s</b> &nbsp; whitespace (space, tab, vtab, newline)</dd>
+<dd><b>\W</b>, <b>\D</b>, or <b>\S</b>,  (NOT word, digit, or whitespace)
+	<p><b>[\D\S]</b> means not digit OR whitespace, both match</p>
+	<p><b>[^\d\s]</b> &nbsp; disallow digit AND whitespace</p>
+</dd>
+
+<dt>occurrences — <b>?&nbsp; *&nbsp; +&nbsp; {n}&nbsp; {n,}&nbsp; {n,n}</b></dt>
+<dd><b>?</b> &nbsp; 0 or 1<p><b>colou?r</b> &nbsp; match <i>color</i> or <i>colour</i></p></dd>
+<dd><b>*</b> &nbsp; 0 or more<p><b>[BW]</b>ill<b>[ieamy's]*</b> &nbsp; match <i>Bill</i>, <i>Willy</i>, <i>William's</i> etc.</p></dd>
+<dd><b>+</b> &nbsp; 1 or more <p><b>[a-zA-Z]+</b> &nbsp; match 1 or more letters</p></dd>
+<dd><b>{n}</b> &nbsp; require n occurrences <p><b>\d{3}</b>-<b>\d{2}</b>-<b>\d{4}</b> &nbsp; match a SSN</p></dd>
+<dd><b>{n,}</b> &nbsp; require n or more<p><b>[a-zA-Z]{2,}</b> &nbsp; 2 or more letters</p></dd>
+<dd><b>{n,m}</b> &nbsp; require n - m <p><b>[a-z]\w{1,7}</b> &nbsp; match a UW NetID</p></dd>
+
+<dt><b>* </b> greedy versus <b>*? </b> lazy</dt>
+<dd><b>* &nbsp;+</b> and <b>{n,}</b> are greedy — match as much as possible</dd>
+<dd><b>&lt;.+&gt;</b> &nbsp; finds 1 big match in <i>&lt;b&gt;bold&lt;/b&gt;</i></dd>
+<dd><b>*? &nbsp;+?</b> and <b>{n,}?</b> are lazy — match as little as possible</dd>
+<dd><b>&lt;.+?&gt;</b> &nbsp; finds 2 matches in <i>&lt;b&gt;</i>bold<i>&lt;/b&gt;</i></dd>
+
+<dt>comments — <b>(?#comment)</b></dt>
+<dd><b>(?#year)</b>(19|20)\d\d &nbsp; embedded comment</dd>
+<dd><b>(?x)</b>(19|20)\d\d <b>#year</b> &nbsp; free spacing &amp; EOL comment 
+	<p>(see modifiers)</p>
+</dd>
+</dl>
+
+
+<dl class="borderL">
+
+<dt class="notop">scope — <b>\b&nbsp; \B&nbsp; ^&nbsp; $</b> </dt>
+<dd><b>\b</b> &nbsp; "word" edge (next to non "word" character)
+	<p><b>\b</b>ring &nbsp; word starts with "ring", ex <i>ringtone</i></p>
+	<p>ring<b>\b</b> &nbsp; word ends with "ring", ex <i>spring</i></p>
+	<p><b>\b9\b</b> &nbsp; match single digit <i>9</i>, not 19, 91, 99, etc.. </p>
+	<p><b>\b</b>[a-zA-Z]{6}<b>\b</b> &nbsp; match 6-letter words</p>
+</dd>
+<dd><b>\B</b> &nbsp; NOT word edge
+	<p><b>\B</b>ring<b>\B</b> &nbsp; match <i>springs</i> and <i>wringer</i></p>
+</dd>
+<dd><b>^</b> start of string &nbsp; <b>$</b> end of string
+	<p><b>^</b>\d*<b>$</b> &nbsp; entire string must be digits</p>
+	<p><b>^</b>[a-zA-Z]{4,20}<b>$</b> &nbsp; string must have 4-20 letters</p>
+	<p><b>^</b>[A-Z] &nbsp; string must begin with capital letter</p>
+	<p>[\.!?"')]<b>$</b> &nbsp; string must end with terminal puncutation</p>
+</dd>
+
+<dt>groups — <b>( )</b></dt>
+<dd><b>(in|out)</b>put &nbsp; match <i>input</i> or <i>output</i></dd>
+<dd>\d{5}<b>(-\d{4})?</b> &nbsp; US zip code ("+ 4" optional)</dd>
+<dd>Locate all PHP input variables:  
+	<p>\$_<b>(GET|POST|REQUEST|COOKIE|SESSION|SERVER)</b>\[.+\]</p>
+</dd>
+<dd>NB: parser tries EACH alternative if match fails after group.<br>
+Can lead to catastrophic backtracking.</dd>
+
+<dt>back references — <b>\n</b></dt>
+<dd>each <b>( )</b> creates a numbered "back reference"</dd>
+<dd><b>(</b>to<b>) (</b>be<b>)</b> or not <b>\1 \2</b> &nbsp; match <i>to be or not to be</i></dd>
+<dd><b>(</b>[^\s]<b>)\1</b>{2} &nbsp; match non-space, then same twice more &nbsp; <i>aaa</i>, <i>...</i></dd>
+<dd>\b<b>(\w+)</b>\s+<b>\1</b>\b &nbsp; match doubled words</dd>
+
+<dt>non-capturing group — <b>(?: )</b> &nbsp; prevent back reference</dt>
+<dd><b>on(?:click|load)</b> is faster than <b>on(click|load)</b></dd>
+<dd>use non-capturing or atomic groups when possible</dd>
+
+<dt>atomic groups — <b>(?&gt;a|b)</b> &nbsp; (no capture, no backtrack)</dt>
+<dd><b>(?&gt;red|green|blue)</b></dd>
+<dd>faster than non-capturing</dd>
+<dd>alternatives parsed left to right without return</dd>
+<dd><b>(?&gt;id|identity)</b>\b &nbsp; matches <i>id</i>, but not <i>id</i>entity <br>
+<p>"id" matches, but "\b" fails <u>after</u> atomic group, <br>
+parser doesn't backtrack into group to retry 'identity'</p>
+</dd>
+<dd>If alternatives overlap, order longer to shorter.</dd>
+
+<dt>lookahead — <b>(?= ) (?! )</b> &nbsp;  lookbehind — <b>(?&lt;= ) (?&lt;! )</b></dt>
+<dd>\b\w+?<code><b>(?=</b>ing\b<b>)</b></code> &nbsp; match <i>warbl</i>ing, <i>str</i>ing, <i>fish</i>ing, ... </dd>
+<dd>\b<code><b>(?!</b>\w+ing\b<b>)</b></code>\w+\b &nbsp; words NOT ending in "ing"</dd>
+<dd><code><b>(?&lt;=</b>\bpre<b>)</b></code>.*?\b &nbsp; match pre<i>tend</i>, pre<i>sent</i>, pre<i>fix</i>, ...</dd>
+<dd>\b\w{3}<code><b>(?&lt;!</b>pre<b>)</b></code>\w*?\b &nbsp; words NOT starting with "pre"
+	<p>(lookbehind needs 3 chars, \w{3}, to compare w/"pre")</p>
+</dd>
+<dd>\b\w+<code><b>(?&lt;!</b>ing<b>)</b></code>\b &nbsp; match words NOT ending in "ing"</dd>
+<dd>(see LOOKAROUND notes below)</dd>
+
+<dt>if-then-else — <b>(?ifthen|else)</b></dt>
+<dd>match "Mr." or "Ms." if word "her" is later in string</dd>
+<dd>M<b>(?(?=</b>.*?\bher\b<b>)s|r)</b>\. &nbsp; lookahead for word "her"</dd>
+<dd>(requires lookaround for IF condition)</dd>
+
+<dt>modifiers — <b>i s m x</b></dt>
+<dd>ignore case, single-line, multi-line, free spacing</dd>
+<dd><b>(?i)</b>[a-z]*<b>(?-i)</b> &nbsp; ignore case ON / OFF</dd>
+<dd><b>(?s)</b>.*<b>(?-s)</b> &nbsp; match multiple lines (causes <i>.</i> to match newline)</dd>
+<dd><b>(?m)</b>^.*;$<b>(?-m)</b> &nbsp; <i>^</i> &amp; <i>$</i> match lines not whole string</dd>
+<dd><b>(?x)</b> &nbsp; &nbsp; #free-spacing mode, this EOL comment ignored</dd>
+<dd> &nbsp; &nbsp; \d{3} &nbsp; &nbsp; #3 digits (new line but same pattern)</dd>
+<dd> &nbsp; &nbsp; -\d{4} &nbsp; &nbsp; #literal hyphen, then 4 digits</dd>
+<dd><b>(?-x)</b> (?#free-spacing mode OFF)</dd>
+<dd>/regex/<b>ismx</b> &nbsp; modify mode for entire string</dd>
+</dl>
+
+
+<h3 class="clear">A few examples:</h3>
+
+<pre>capture P content using if-then-else to allow for attributes in opening tag
+<b>(?s)&lt;p(?(?=\s)\ .*?)&gt;(.*?)&lt;/p&gt;</b>
+</pre>
+
+<ul>
+	<li><b>(?s)</b>&lt;p(?(?=\s)\ .*?)&gt;(.*?)&lt;/p&gt; &nbsp; span multiple lines</li>
+	<li>(?s)<b>&lt;p</b>(?(?=\s)\ .*?)&gt;(.*?)&lt;/p&gt; &nbsp; locate opening "&lt;p"</li>
+	<li>(?s)&lt;p<b>(?</b>(?=\s)\ .*?<b>)</b>&gt;(.*?)&lt;/p&gt; &nbsp; create an if-then-else</li>
+	<li>(?s)&lt;p(?<b>(?=\s)</b>\ .*?)&gt;(.*?)&lt;/p&gt; &nbsp; lookahead for a whitespace character</li>
+	<li>(?s)&lt;p(?(?=\s)<b>\ .*?</b>)&gt;(.*?)&lt;/p&gt; &nbsp; if found, attempt lazy match of any characters until ...</li>
+	<li>(?s)&lt;p(?(?=\s)\ .*?)<b>&gt;</b>(.*?)&lt;/p&gt; &nbsp; closing angle brace</li>
+	<li>(?s)&lt;p(?(?=\s)\ .*?)&gt;<b>(.*?)</b>&lt;/p&gt; &nbsp; capture lazy match of all characters until ...</li>
+	<li>(?s)&lt;p(?(?=\s)\ .*?)&gt;(.*?)<b>&lt;/p&gt;</b> &nbsp; closing "&lt;/p&gt;"</li>
+</ul>
+
+<p>The lookahead prevents matches on PRE, PARAM, and PROGRESS tags by only allowing more characters in the opening tag if P is followed by whitespace.  Otherwise, "&gt;" must follow "&lt;p".</p>
+
+<h4>LOOKAROUND notes </h4>
+
+<ul>
+	<li><b>(?= &nbsp; )</b> &nbsp; if you can find ahead</li>
+	<li><b>(?! &nbsp; )</b> &nbsp; if you can NOT find ahead</li>
+	<li><b>(?&lt;= &nbsp; )</b> &nbsp;	if you can find behind</li>
+	<li><b>(?&lt;! &nbsp; )</b>	if you can NOT find behind</li>
+</ul>
+
+<dl>
+	<dt>convert Firstname Lastname to Lastname, Firstname (&amp; visa versa)</dt>
+	<dd>Pattern below uses lookahead to capture everything up to a space, characters, and a newline.  <br>The 2nd capture group collects the characters between the space and the newline.  <br>This allows for any number of names/initials prior to lastname, provided lastname is at the end of the line.  
+		<p>Find: <code>(.*)<b>(?= .*\n)</b> (.*)\n</code> </p>
+		<p>Repl: <code>\2, \1\n</code> — insert 2nd capture (lastname) in front of first capture (all preceding names/initials)</p>
+	</dd>
+	<dd>Reverse the conversion.  
+		<p>Find: <code>(.*?), (.*?)\n</code> — group 1 gets everything up to ", " — group 2 gets everything after ", "</p>
+		<p>Repl: <code>\2 \1\n</code></p>
+	</dd>
+
+	<dt>lookaround groups are non-capturing</dt>
+	<dd>If you need to capture the characters that match the lookaround condition, you can insert a capture group inside the lookaround.
+	<p><code>(?=<b>(</b>sometext<b>)</b>)</code> &nbsp; the inner () captures the lookahead</p>
+	<p>This would NOT work: <code><b>(</b>(?=sometext)<b>)</b></code> &nbsp; Because lookaround groups are zero-width, the outer () capture nothing.</p>
+	</dd>
+	
+	<dt>lookaround groups are <b>zero-width</b></dt>
+	<dd>They establish a condition for a match, but are not part of it.</dd>
+	<dd>Compare these patterns: &nbsp; <code>re?d</code> vs <code>r(?=e)d</code></dd>
+	<dd><code>r<b>e?</b>d</code> — match an "r", an optional "e", then "d" — matches <b>red</b> or <b>rd</b></dd>
+	<dd><code>r<b>(?=e)</b>d</code> — match "r" (IF FOLLOWED BY "e") then see if "d" comes after "r"
+		<ul>
+			<li>The lookahead seeks "e" only for the sake of matching "r".</li>
+			<li>Because the lookahead condition is ZERO-width, the expression is logically impossible.</li>  
+			<li>It requires the 2nd character to be both "e" and "d".</li>
+			<li>For looking ahead, "e" must follow "r".</li>
+			<li>For matching, "d" must follow "r".</li>
+		</ul>
+	</dd>
+
+
+	
+	<dt>fixed-width lookbehind</dt>
+	<dd>Most regex engines depend on knowing the width of lookbehind patterns.
+		Ex: <code><b>(?&lt;=h1)</b></code> or <code><b>(?&lt;=\w{4})</b></code>  look behind for "h1" or for 4 "word" characters.
+	</dd>
+	<dd>This limits lookbehind patterns when matching HTML tags, since the width of tag names and their potential attributes can't be known in advance.
+	</dd>
+
+	<dt>variable-width lookbehind</dt>
+	<dd><b>.NET</b> and <b>JGSoft</b> support variable-width lookbehind patterns.  Ex:
+	  <code><b>(?&lt;=\w+)</b></code>  look behind for <u>1 or more</u> word characters. <br>
+  The first few examples below rely on this ability.
+	</dd>
+
+</dl>
+
+
+	
+
+<pre>match text bound by simple HTML tags &nbsp; (NB: <code>&lt;</code>\w+<code>&gt;</code> does not match tags with attributes.)
+<b>(?&lt;=</b>&lt;<b>(\w+)</b>&gt;<b>).*(?=</b>&lt;/<b>\1</b>&gt;<b>)</b>
+</pre>
+
+<p>Lookaround groups define the context for a match.  Here, we're seeking &nbsp; <b>.*</b> &nbsp; ie., 0 or more characters.  <br>
+A positive lookbehind group  &nbsp; <code><b>(?&lt;= . . . )</b></code> &nbsp; preceeds.  A positive lookahead group  &nbsp; <code><b>(?= . . . )</b></code> &nbsp; follows. <br>
+These set the boundaries of the match this way:  
+</p>
+
+<ul>
+	<li><b>(?&lt;=</b>&lt;(\w+)&gt;<b>)</b>.*(?=&lt;/\1&gt;) &nbsp; look behind current location</li>
+	<li>(?&lt;=<b>&lt;</b>(\w+)<b>&gt;</b>).*(?=&lt;/\1&gt;) &nbsp; for &lt; &nbsp; &gt; surrounding ...</li>
+	<li>(?&lt;=&lt;<b>(\w+)</b>&gt;).*(?=&lt;/\1&gt;) &nbsp; one or more "word" characters.  The ( ) create a capture group to preserve the name of the presumed tag: DIV, H1, P, A, etc.</li>
+	<li>(?&lt;=&lt;(\w+)&gt;)<b>.*</b>(?=&lt;/\1&gt;) &nbsp; match anything until</li>
+	<li>(?&lt;=&lt;(\w+)&gt;).*<b>(?=</b>&lt;/\1&gt;<b>)</b> &nbsp; looking ahead from the current character</li>
+	<li>(?&lt;=&lt;(\w+)&gt;).*(?=<b>&lt;/</b>\1<b>&gt;</b>) &nbsp; these characters surround</li>
+	<li>(?&lt;=&lt;(\w+)&gt;).*(?=&lt;/<b>\1</b>&gt;) &nbsp; the contents of the first capture group</li>
+</ul>
+
+<p>In other words, advance along string until an opening HTML tag preceeds.  Match chars until its closing HTML tag follows. <br>
+ The tags themselves are not matched, only the text between them.  
+</p>
+
+<p>To span multiple lines, use the <b>(?s)</b> modifier. &nbsp; <code><b>(?s)</b>(?&lt;=&lt;cite&gt;).*(?=&lt;/cite&gt;)</code> &nbsp; Match &lt;cite&gt; tag contents, regardless of line breaks.
+</p>
+
+<pre>match text bound by HTML tags, including tags with attributes (not nested, though)
+<b>(?&lt;=&lt;(\w+?)\ ?.*?&gt;).*(?=&lt;/\1&gt;)</b>
+</pre>
+
+<p>As in example above, the first group <code><b>(\w+)</b></code> captures the presumed tag name, then an optional space and other characters <code><b>\ ?.*?</b></code> allow for attributes before the closing <b>&gt;</b>.</p>
+
+<pre>match text bound by HTML tags when a class attribute = "red"
+<b>(?&lt;=&lt;(\w+?)\ ?.*?class=".*?\bred\b.*?".*?&gt;).*(?=&lt;/\1&gt;)</b>
+</pre>
+
+<ul>
+	<li><b>class=".*?\bred\b.*?"</b> &nbsp; this new part looks for <b>class="</b> and <b>red</b> and <b>"</b> somewhere in the opening tag
+	</li><li><b>\b</b> &nbsp; &nbsp; &nbsp; ensures "red" is a single word </li>
+	<li><b>.*?</b> &nbsp; &nbsp; &nbsp; allow for other characters on either side of "red" so pattern matches <code>class="red"</code> and <code>class="blue red green"</code> etc.
+	</li>
+</ul>
+
+<pre>match complex opening &amp; closing xhtml tags and all text between
+<b>(?i)</b>&lt;<b>([a-z][a-z0-9]*)[^&gt;]*</b>&gt;<b>.*?</b>&lt;/<b>\1</b>&gt;
+</pre>
+
+<p>Here, the first group captures only the tag name.  The tag's potential attributes are outside the group.</p>
+
+<ul>
+<li><b>(?i)</b>&lt;([a-z][a-z0-9]*)[^&gt;]*&gt;.*?&lt;/\1&gt; &nbsp;  set ignore case ON</li>
+<li>(?i)&lt;(<b>[a-z]</b>[a-z0-9]*)[^&gt;]*&gt;.*?&lt;/\1&gt; &nbsp; find an opening tag by matching 1 letter after &lt;</li>
+<li>(?i)&lt;([a-z]<b>[a-z0-9]*</b>)[^&gt;]*&gt;.*?&lt;/\1&gt; &nbsp; then match 0 or more letters or digits</li>
+<li>(?i)&lt;<b>(</b>[a-z][a-z0-9]*<b>)</b>[^&gt;]*&gt;.*?&lt;/\1&gt; &nbsp; make this tag a capture group</li>
+<li>(?i)&lt;([a-z][a-z0-9]*)<b>[^&gt;]*</b>&gt;.*?&lt;/\1&gt; &nbsp; match 0 or more characters that aren't &gt; — this allows attributes in opening tag</li>
+<li>(?i)&lt;([a-z][a-z0-9]*)[^&gt;]*<b>&gt;</b>.*?&lt;/\1&gt; &nbsp; match the presumed end of the opening tag 
+	<p>(NB: This markup &nbsp; &lt;a onclick="valueOK('a<i>&gt;</i>b')"&gt; &nbsp; would end the match early.  
+		Doesn't matter here.  Subsequent &nbsp; &lt; &nbsp; pulls match to closing tag.  But if you attempted to match only the opening tag, it might be truncated in rare cases.)
+	</p>
+</li>
+<li>(?i)&lt;([a-z][a-z0-9]*)[^&gt;]*&gt;<b>.*?</b>&lt;/\1&gt; &nbsp; lazy match of all of tag's contents</li>
+<li>(?i)&lt;([a-z][a-z0-9]*)[^&gt;]*&gt;.*?<b>&lt;/\1&gt;</b> &nbsp; match the closing tag — \1 refers to first capture group </li>
+</ul>
+
+<pre>IF condition — phone number w/optional parentheses around area code (and optional space after closing parens)
+<b>(\()?\d{3}(?(1)\)&nbsp;?|[- \.])\d{3}[- \.]\d{4}</b>
+</pre>
+
+<p>The IF condition can be set by a backreference (as here) or by a lookaround group.</p>
+
+<dl>
+<dd><b>(</b>\(<b>)?</b>\d{3} &nbsp; optional group (&nbsp;)? matches "(" prior to 3-digit area code  \d{3} — group creates back reference #1</dd>
+<dd><b>(?(1)</b>\)&nbsp;?<b>|</b>[-/ \.]<b>)</b> &nbsp; (1) refers to group 1, so if "(" exists, match ")" followed by optional space, else match one of these: "- / . "</dd>
+<dd>\d{3}[- \.]\d{4} &nbsp; rest of phone number</dd>
+</dl>
+
+<pre>groups can be named (assume a file of lastname, firstname altered using "preg_replace()")
+(?#find)<b>(</b>\b.+<b>)</b>, <b>(</b>\b.*\b<b>)</b> &nbsp; (?#replace)<b>\2 \1</b> 
+(?#find)<b>(?P&lt;lname&gt;</b>\b.+<b>)</b>, <b>(?P&lt;fname&gt;</b>\b.*\b<b>)</b> &nbsp; (?#replace) <b>(?P=fname) (?P=lname)</b>
+</pre>
+
+
+<p>For a quick overview: <a href="http://www.codeproject.com/KB/dotnet/regextutorial.aspx" target="_blank">
+http://www.codeproject.com/KB/dotnet/regextutorial.aspx</a>.</p>
+<p>For a good tutorial: <a href="http://www.regular-expressions.info/" target="_blank">http://www.regular-expressions.info</a>.</p>
+<!--regex popup-->
+
+
+</body></html>
