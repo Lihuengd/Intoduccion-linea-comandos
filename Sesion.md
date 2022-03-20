@@ -4,7 +4,7 @@
 ## 1. Introducción
 Al igual que las personas nos comunicamos entre nosotras a través de un idioma, las máquinas entienden también un lenguaje. Existen muchos lenguajes de programación, pero nosotros nos centraremos en el lenguaje de **Bash** (Bourne Again Shell), un intérprete de órdenes y lenguaje de programación empleado en distribuciones GNU/Linux. Si te interesa conocer más sobre el origen de Bash, dirígete a este [Link](https://es.wikipedia.org/wiki/Bash).
 ![bash](Imagenes/bash.jpg)
-La razón por la cual trabajamos en esta Shell/lenguaje es que se trata de un lenguaje relativamente sencillo y muy robusto, lo que lo hace muy eficiente a la hora de usar memoria y correr procesos costosos. Además, permite crear entornos en los que se pueden usar otros lenguajes (Python, R, Perl, etc.), y por eso es un lenguaje básico en el análisis de datos procedentes de (meta)genómica y (meta)transcriptómica.
+La razón por la cual trabajamos en esta Shell/lenguaje es que se trata de un lenguaje relativamente sencillo y muy robusto, lo que lo hace muy eficiente a la hora de usar memoria y correr procesos costosos. Además, permite crear entornos en los que se pueden usar otros lenguajes (Python, R, Perl, etc.), y por eso es un lenguaje básico en el análisis de datos procedentes de (meta)genómica y (meta)transcriptómica. **Si la velocidad es una preocupación (por ej., cuando estemos manejando ficheros muy grandes, y/o gran cantidad de ficheros), las herramientas UNIX son, normalmente, las que dan la implementación más veloz (l@s hackers de los 70 eran un@s verdader@s máquinas).**
 
 Como hemos dicho, Bash es un intérprete de órdenes, por lo que nos va a permitir dictarle órdenes concretas para que sean ejecutadas por nuestro ordenador. Las órdenes que recibe Bash, como cualquier lenguaje de programación, son estrictas, es decir, Bash irá interpretando caracter por caracter y si encuentra algo inesperado (algún caracter incorrecto, alguna mayuscula/minuscula cambiada, espacios donde no deben ir, etc) devolverá un error. Es importante tener esto en cuenta, ya que la mayor parte de los errores que cometemos mientras estamos trabajando en la shell se deben a fallos de escritura.
 
@@ -77,7 +77,7 @@ Una opción interesante de `cp` y `rm` es la opcion -r (*recursive*), que copiar
 ```
 
 Truquillos: autocompletado con el tabulador y acceso a comandos anteriores con las flechas
-
+https://sospedia.net/shell-bash-gnulinux/ Link para ver más detalles sobre la navegación por el sistema de ficheros en Bash.
 ## 3. Redirección de entradas y salidas
 Hasta ahora hemos visto cómo darle una órden a Bash  y cómo este las ejecuta devilviendo su respuesta por pantalla (la salida estándar). De hecho, ahora mismo tendrás tu pantalla llena de cosas. Si en algún momento te agobias y quieres limpiar tu pantalla, teclea `clear` y obtendrás paz mental.
 
@@ -147,7 +147,9 @@ miercoles
 sabado
 viernes
 ```
-
+`sort`, por defecto, tomará el orden lexicográfico (10<2). Para que ordene números hay que decírselo con `-n`. Otro detalle es que `sort` ordena de menor a mayor. Si queremos que ordene en el otro sentido, debemos pasarle la opción `-r`.
+```
+```
 Hsata ahora, los filtros no parecen tener mucha utilidad, esto podríamos hacerlo perfectamente en una hoja de cálculo o en un editor de texto. Sin embargo, cuando trabajamos con información derivada de la secuenciacion de ADN, solemos trabajar con archivos muy grandes y pesados que tardan en abrirse y hasta la operación más simple como ordenar sus filas sería un dolor. Así que a partir de ahora vamos a trabajar con un ficheros reales. 
 
 En este repositorio disponeis de un archivo `Staphylococcus-aureus.gtf`. Vamos a inspeccionar este fichero con la órden `less` que tiene la vemtaja de no cargar todo el contenido del fichero en la memoria para mostrarlo, lo que lo hace muy eficiente en memoria. 
@@ -194,7 +196,13 @@ Si has sido lo suficientemente observador, te habrás fijado en que la tercera c
 ```
 cut -f2-3 Staphylococcus-aureus.gtf
 ```
-Nos habrán aparecido en pantalla un monton de líneas. Sin embargo, lo que a nosotros nos interesa es el número que hay de cada *feature*. El filtro `uniq`nos ayudará, ya que su función es quitar ocurrencias repetidas, es decir, nos mostrará por pantalla sólo las líneas únicas. Además, con la opción -c nos contará cuántas veces aparece cada línea.
+Por defecto, cut va a interpretar el tabulador como el separador por defecto de nuestros datos. Pero podemos especificar el que queramos con la opción -d. Aquí va un ejemplo sencillo:
+```
+```
+Como orden complementaria a cut, existe paste. Esta orden toma una línea del fichero y le añade lo que queremos, por ejemplo, para unir nuestros ficheros .bed horizontalmente usando un tabulador, haríamos:
+```
+```
+Pero bueno, no nos desviemos. Despues de ejecutar `cut -f2-3` os habrán aparecido en pantalla un monton de líneas. Sin embargo, lo que a nosotros nos interesa es el número que hay de cada *feature*. El filtro `uniq`nos ayudará, ya que su función es quitar ocurrencias repetidas, es decir, nos mostrará por pantalla sólo las líneas únicas. Además, con la opción -c nos contará cuántas veces aparece cada línea.
 ```
 cut -f2-3 Staphylococcus-aureus.gtf | uniq -c
       1 ##gff-version 3
@@ -225,7 +233,12 @@ $ cut -f2-3 Staphylococcus-aureus.gtf | sort | uniq -c
     180 FIG     tRNA
 ```
 
-¡Conseguido! Como veis, la combinacion de filtros puede sernos de mucha utilidad cuando inspeccionamos archivos procedentes de la secuenciación o anotación de genomas. Estos son sólo algunos filtros de los más usados
+¡Conseguido! Como veis, la combinación de filtros puede sernos de mucha utilidad cuando inspeccionamos archivos procedentes de la secuenciación o anotación de genomas. Estos son sólo algunos filtros de los más usados y útiles, pero no son los únicos.
+
 ## 6. Filtros avanzados
+Hasta ahora hemos visto filtros con funciones bastante simples. En este apartado veremos tres filtros con funciones un poco más complejas: `grep`, `awk` y `sed`.
 
+**grep**
+`grep` es el filtro por exelencia para trabajar en línea de comandos con Bash. Llega a ser hasta 5 veces más rápido que cualquier otro filtro o cualquier otra herramienta de búsqueda parecida que podamos escribir en Python o en R, por ejemplo. Esta rapidez de acción se debe a que `grep` esta diseñada específicamente para cumplir una sola función muy muy bien: buscar en un fichero las **líneas** que casan con un **patrón**.
 
+Así `grep` recibe dos argumentos obligatorios:
