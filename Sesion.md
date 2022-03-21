@@ -366,7 +366,7 @@ Existen muchos metacaracteres que podemos emplear para las expresiones regulares
 | {m,n}            | Casa **m a n** ocurrencias (intervalo cerrado) del carácter (o grupo de caracteres/expresiones) inmediatamente a la izquierda                                                                                                 |
 | \|               | Combina expresiones regulares con un OR                                                                                                                                                                 |
 | \                | Escapar metacaracteres. Se usa cuando se quiere casar con un metacaracter literalmente. Por ejemplo, `\.` casa con un punto, y `\?` casa con un símbolo de cierre de interrogación.                                                                   |
-| ( )              | Usado para agrupar caracteres en una única unidad, a los que se le podrán aplicar modificadores como `*` o `+`. También se usa para delimitar el alcance de una expresión OR (`|`), o en expresiones avanzadas para insertar reemplazos. |
+| ( )              | Usado para agrupar caracteres en una única unidad, a los que se le podrán aplicar modificadores como `*` o `+`. También se usa para delimitar el alcance de una expresión OR `(|)`, o en expresiones avanzadas para insertar reemplazos. |
 
 
 
