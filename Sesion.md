@@ -483,7 +483,34 @@ Vamos a desglosar esta línea:
 ))
 - La acción `{ print $1 "\t" $4 "\t" $5 "\t" $5-$4}` le indica a awk, que en todas aquellas líneas que han cumplido los requisitos del patrón, muetsre por pantalla las columnas 1, 4, 5 y el resultado de la resta columna5-columna4, separadas por tabuladores (`\t`).
 
-En resumen, hemos calculado la longitud de las anotaciónes y hemos seleccionado aquellas con una longitud mayor a 200 pares de bases. 
+En resumen, hemos calculado la longitud de las anotaciones y hemos seleccionado aquellas con una longitud mayor a 200 pares de bases. 
 
 ### sed
+Por último, vamos a ver por encima el funcionamiento de `sed` (*stream-editor*). Esta es una herramienta muy útil para editar textos de forma repetitiva, por ejemplo, cuando queremos adaptar un fichero a un determinado formato y esto requiere la sustitución recursiva de una palabra por otra. 
+
+´sed´ acepta la siguiente estructura como argumento: `s/patrón/reemplazo` + `fichero`
+
+Asi, sed irá leyendo linea por linea y cuando encuentre el patrón lo sustituirá por el reemplazo:
+```
+$ sed "s/ID/AD/g" Staphylococcus-aureus.gtf | head
+##gff-version 3
+AP017922.1      FIG     CDS     517     1878    .       +       1       AD=fig|6666666.735992.peg.1;Name=Chromosomal replication initiator protein DnaA
+AP017922.1      FIG     CDS     2155    3288    .       +       1       AD=fig|6666666.735992.peg.2;Name=DNA polymerase III beta subunit (EC 2.7.7.7);Ontology_term=KEGG_ENZYME:2.7.7.7
+AP017922.1      FIG     CDS     3678    3914    .       +       0       AD=fig|6666666.735992.peg.3;Name=Uncharacterized S4 RNA-binding-domain protein YbcJ
+AP017922.1      FIG     CDS     3911    5023    .       +       2       AD=fig|6666666.735992.peg.4;Name=DNA recombination and repair protein RecF
+AP017922.1      FIG     CDS     5033    6967    .       +       2       AD=fig|6666666.735992.peg.5;Name=DNA gyrase subunit B (EC 5.99.1.3);Ontology_term=KEGG_ENZYME:5.99.1.3
+AP017922.1      FIG     CDS     7004    9664    .       +       2       AD=fig|6666666.735992.peg.6;Name=DNA gyrase subunit A (EC 5.99.1.3);Ontology_term=KEGG_ENZYME:5.99.1.3
+AP017922.1      FIG     CDS     9750    10562   .       -       0       AD=fig|6666666.735992.peg.7;Name=ADP-dependent (S)-NAD(P)H-hydrate dehydratase (EC 4.2.1.136);Ontology_term=KEGG_ENZYME:4.2.1.136
+AP017922.1      FIG     CDS     10887   11114   .       +       0       AD=fig|6666666.735992.peg.8;Name=Histidine ammonia-lyase (EC 4.3.1.3);Ontology_term=KEGG_ENZYME:4.3.1.3
+AP017922.1      FIG     CDS     11115   12401   .       +       0       AD=fig|6666666.735992.peg.9;Name=Histidine ammonia-lyase (EC 4.3.1.3);Ontology_term=KEGG_ENZYME:4.3.1.3
+
+```
+Vemos que he sustituido todas los "ID" de mi documento por "AD". El flag `g` del final se añade para que `sed` siga buscando el patrón en una línea aunque lo haya encontrado ya una vez. Así, si tenemos más de un "ID" en una misma fila, se sustituirán todos.
+
+Esto en realidad, no sirve para absolutamente nada, pero puede ser de grán utilidad cuando se trata de adaptar nuestros streams rápidamente para que sean aceptados por otras herramientas.
+
+
+## 7. Más comandos
+Para terminar, os he querido dejar por aquí algunos comandos de gran utilidad cuando estéis trabajando en línea de comandos:
+
 
