@@ -370,11 +370,11 @@ Existen muchos metacaracteres que podemos emplear para las expresiones regulares
 
 
 
-En los patrones con expresiones regulares también se pueden introducir rangos de caracteres, es decir, se puede indicar que case, por ejemplo, con todos los números comprendidos entre 1 y 100 o con las letras comprendidas entre a y m poniendo los caracteres entre corchetes y separados con un guión (`[1-100]` `[a-m]`).
+En los patrones con expresiones regulares también se pueden introducir rangos de caracteres, es decir, se puede indicar que case, por ejemplo, con todos los números comprendidos entre 1 y 8 o con las letras comprendidas entre a y m poniendo los caracteres entre corchetes y separados con un guión (`[1-8]` `[a-m]`).
 
 Vamos a ver un ejemplo de uso de expresiones regulares con `grep` para entendernos mejor. Cuando hiciste `head` y `tail` sobre el gtf, también pudiste observar que aquellas anotaciones correspondientes a CDS tenían un id.peg, mientras que las anotaciones de RNA o tRNA tienen un id.rna. Imaginemos que queremos contar todas las anotaciones con id.peg en nuestro gtf para comprobar que efectivamente coincide con el recuento de CDS que hicimos anteriormente. Con grep podría ser algo así:
 ```
-grep -E -c 'peg.[0-9]{0,9}' Staphylococcus-aureus.gtf
+$ grep -E -c 'peg.[0-9]{0,9}' Staphylococcus-aureus.gtf
 2551
 ```
 Para explicar este ejemplo, iremos paso por paso. Primero analizamos las opciones utilizadas. En este caso he usado la opción `-c` para contar las líneas que coinciden con el patrón (ya la hemos visto) y la opción -E para que grep entienda que le voy a pasar una Expresión Regular Extendida (EREs). Existen las Expresiones Regulares Básicas (BREs), que son las que entiende `grep` por defecto y se limitan a unos pocos metacaracteres (`^`, `$`, `.` y `*`), y existen las EREs que son más modernas y admiten más metacaracteres y nos dan mucho más juego. Como `grep` fue diseñada para BREs, tenemos que indicarle con la opción -E que vamos a usar EREs en nuestro patrón.
