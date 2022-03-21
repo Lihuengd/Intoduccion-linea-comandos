@@ -514,21 +514,35 @@ Esto en realidad, no sirve para absolutamente nada, pero puede ser de grán util
 Para terminar, os he querido dejar por aquí algunos comandos extra de gran utilidad cuando estéis trabajando en línea de comandos:
 
 **Instalación de programas**
+
 `sudo apt install` + nombre del programa
+
 **Actualizar apt**
+
 `sudo apt update`
+
 **Conexiones ssh**
+
 `ssh` + usuario@host 
+
 **Descarga de datos**
+
 `wget` + enlace
+
 **Clonar repositorio de GitHub en nuestro ordenador**
+
 `git clone` + Enlace al repositorio
+
 **Comprimir y descomprimir archivos**
+
 `zip` + archivo para comprimir
+
 `unzip` + archivo.zip para descomprimir
 
 `gzip` + archivo para comprimir
+
 `gunzip`  + archivo.gz para descomprimir
 
 `zcat` para leer archivos comprimidos
+
 `zgrep` para buscar en archivos comprimidos
