@@ -287,8 +287,6 @@ Existen muchos metacaracteres que podemos emplear para las expresiones regulares
 
 En los patrones con expresiones regulares también se pueden introducir rangos de caracteres, es decir, se puede indicar que case, por ejemplo, con todos los números comprendidos entre 1 y 100 o con las letras comprendidas entre a y m poniendo los caracteres entre corchetes y separados con un guión (`[1-100]` `[a-m]`).
 
-PARA PROFUNDIZAR MÁS EN EL USO DE METACARACTERES CON GREP OS HE DEJADO UNA GUÍA MUY ÚTIL [AQUÍ](https://staff.washington.edu/weller/grep.html). 
-
 Vamos a ver un ejemplo de uso de expresiones regulares con `grep` para entendernos mejor. Cuando hiciste `head` y `tail` sobre el gtf, también pudiste observar que aquellas anotaciones correspondientes a CDS tenían un id.peg, mientras que las anotaciones de RNA o tRNA tienen un id.rna. Imaginemos que queremos contar todas las anotaciones con id.peg en nuestro gtf para comprobar que efectivamente coincide con el recuento de CDS que hicimos anteriormente. Con grep podría ser algo así:
 ```
 grep -E -c 'peg.[0-9]{0,9}' Staphylococcus-aureus.gtf
@@ -351,4 +349,6 @@ peg.2550
 peg.2551
 ```
 
+Lo cierto es que esta aplicación de `grep` puede parecer sencilla, pero puede llegar a ser muy poderosa y útil. De hecho, `grep`es el pan nuestri de cada día cuando trabajamos en línea de comandos. PARA PROFUNDIZAR MÁS EN EL USO DE METACARACTERES CON GREP OS FACILITO UNA GUÍA MUY ÚTIL [AQUÍ](https://staff.washington.edu/weller/grep.html). 
 
+### awk
