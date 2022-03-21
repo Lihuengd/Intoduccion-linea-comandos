@@ -461,5 +461,29 @@ AP017922.1 3911 5023
 AP017922.1 5033 6967
 ```
 Esta misma pipeline que combina `grep` y `awk`, podría realizarse usando solamente `awk`, pero para ello debemos introducir expresiones lógicas. Algunas que acepta `awk` son: `a == b` (a es igual a b), `a != b`	(a no es igual a b), `a < b`	(a es menor que b), `a > b`	(a es mayor que b), `a <= b`	(a es menor o igual a b), `a >= b`	(a es mayor o igual a b), `a ~ b`	(a casa con la expresión regular b), `a !~ b`	(a no casa con la expresión regular b), `a && b`	(operador lógico AND), `a || b`	(operador lógico OR), y `!a`	(negación lógica).
+```
+$  awk '$0 !~ "^#" { print $1 " " $4 " " $5 }' Staphylococcus-aureus.gtf | head -n5
+AP017922.1 517 1878
+AP017922.1 2155 3288
+AP017922.1 3678 3914
+AP017922.1 3911 5023
+AP017922.1 5033 6967
+```
+Sin embargo, hasta ahora, no hemos hecho nada que no hayamos hecho con los otros filtros. Vamos a complicar un poco la cosa. ¿Sabrías decirme qué hace la siguiente línea?
+```
+$ awk '$0 !~ /^#/ && $5 - $4 >= 200 { print $1 "\t" $4 "\t" $5 "\t" $5-$4}' Staphylococcus-aureus.gtf | head -n5
+AP017922.1      517     1878    1361
+AP017922.1      2155    3288    1133
+AP017922.1      3678    3914    236
+AP017922.1      3911    5023    1112
+AP017922.1      5033    6967    1934
+````
+Vamos a desglosar esta línea:
+- El patron `$0 !~ /^#/ && $5 - $4 >= 200` le esta indicando a `awk` que 1) analice las líneas que no empiecen por #, es decir, que ignore los encabezados (`$0 !~ /^#/`), 2) que aplique este patrón junto con el siguiente (`&&`), 3) que haga una resta entre la columna 5 y la columna 4 (`$5 - $4`), y 4) que compruebe si el resultado de la resta es mayor o igual que 200 (`>= 200`).
+))
+- La acción `{ print $1 "\t" $4 "\t" $5 "\t" $5-$4}` le indica a awk, que en todas aquellas líneas que han cumplido los requisitos del patrón, muetsre por pantalla las columnas 1, 4, 5 y el resultado de la resta columna5-columna4, separadas por tabuladores (`\t`).
 
+En resumen, hemos calculado la longitud de las anotaciónes y hemos seleccionado aquellas con una longitud mayor a 200 pares de bases. 
+
+### sed
 
