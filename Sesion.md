@@ -4,7 +4,7 @@
 ## 1. Introducción
 Al igual que las personas nos comunicamos entre nosotras a través de un idioma, las máquinas entienden también un lenguaje. Existen muchos lenguajes de programación, pero nosotros nos centraremos en el lenguaje de **Bash** (Bourne Again Shell), un intérprete de órdenes y lenguaje de programación empleado en distribuciones GNU/Linux. Si te interesa conocer más sobre el origen de Bash, dirígete a este [Link](https://es.wikipedia.org/wiki/Bash).
 ![bash](Imagenes/bash.jpg)
-La razón por la cual trabajamos en esta Shell/lenguaje es que se trata de un lenguaje relativamente sencillo y muy robusto, lo que lo hace muy eficiente a la hora de usar memoria y correr procesos costosos.**Si la velocidad es una preocupación (por ejemplo, cuando estemos manejando ficheros muy grandes, y/o gran cantidad de ficheros), las herramientas UNIX son, normalmente, las que dan la implementación más veloz.** Además, permite crear entornos en los que se pueden usar otros lenguajes (Python, R, Perl, etc.) y, por eso, es un lenguaje básico en el análisis de datos procedentes de (meta)genómica y (meta)transcriptómica. 
+La razón por la cual trabajamos en esta Shell/lenguaje es que se trata de un lenguaje relativamente sencillo y muy robusto, lo que lo hace muy eficiente a la hora de usar memoria y correr procesos costosos.**Si la velocidad es una preocupación (por ejemplo, cuando estemos manejando ficheros muy grandes, y/o gran cantidad de ficheros), las herramientas UNIX son, normalmente, las que dan la implementación más veloz**  y, por eso, es un lenguaje básico en el análisis de datos procedentes de (meta)genómica y (meta)transcriptómica. 
 
 Como hemos dicho, Bash es un intérprete de órdenes, por lo que podemos dictarle órdenes concretas para que sean ejecutadas por nuestro ordenador. Las órdenes que recibe Bash, como cualquier lenguaje de programación, son estrictas, es decir, Bash irá interpretando carácter por carácter y si encuentra algo inesperado (algún carácter incorrecto, alguna mayúscula/minúscula cambiada, espacios donde no deben ir, etc.) devolverá un error. Es importante tener esto en cuenta, ya que la mayor parte de los errores que cometemos mientras estamos trabajando en la shell se deben a fallos de escritura.
 
@@ -511,11 +511,24 @@ Esto en realidad, no sirve para absolutamente nada, pero puede ser de grán util
 
 
 ## 7. Más comandos de utilidad
-Para terminar, os he querido dejar por aquí algunos comandos de gran utilidad cuando estéis trabajando en línea de comandos:
+Para terminar, os he querido dejar por aquí algunos comandos extra de gran utilidad cuando estéis trabajando en línea de comandos:
 
 **Instalación de programas**
-**Crear entornos**
+`sudo apt install` + nombre del programa
+**Actualizar apt**
+`sudo apt update`
 **Conexiones ssh**
+`ssh` + usuario@host 
 **Descarga de datos**
+`wget` + enlace
 **Clonar repositorio de GitHub en nuestro ordenador**
+`git clone` + Enlace al repositorio
 **Comprimir y descomprimir archivos**
+`zip` + archivo para comprimir
+`unzip` + archivo.zip para descomprimir
+
+`gzip` + archivo para comprimir
+`gunzip`  + archivo.gz para descomprimir
+
+`zcat` para leer archivos comprimidos
+`zgrep` para buscar en archivos comprimidos
