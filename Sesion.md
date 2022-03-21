@@ -175,18 +175,18 @@ Mon Mar 21 08:20:33     2022
 De la misma forma, podemos redirirgir la entrada para que nuestras órdenes se ejecuten sobre la información de un fichero. Para ello, tendríamos que usar el símbolo menor que (<), pero esto lo pondrémos en práctica más adelante.
 
 ## 4. Edición de ficheros 
-Una de las partes básicas y más importantes cuando trabajamos en línea de comandos es la edición de ficheros. En este curso veremos dos opciones. La primera de ellas es `cat`, que ya la hemos usado. En realidad, la acción de `cat` simplemente consiste en imprimir por pantalla lo que recibe desde el teclado, de forma que si invocamos `cat`sin argumentos se va a quedar esperando a que le introduzcamos información por nuestro teclado. Cuando le introducimos algo y pulsamos 'enter', `cat` repite todo lo que tecleamos.
+Una de las partes básicas y más importantes cuando trabajamos en línea de comandos es la edición de ficheros. En este curso veremos dos opciones. La primera de ellas es `cat`, que ya la hemos usado. En realidad, la acción de `cat` simplemente consiste en imprimir por pantalla lo que recibe desde el teclado, de forma que si invocamos `cat` sin argumentos se va a quedar esperando a que le introduzcamos información por nuestro teclado. Cuando le introducimos algo y pulsamos 'enter', `cat` repite todo lo que tecleamos.
 ```
-cat
+$cat
 lunes
 lunes
 martes
 martes
-[[Ctrl+C]] para interrumpir este proceso de forma abrupta y salir de este bucle.
+[[Ctrl+C]] para interrumpir el proceso de forma abrupta y salir de este bucle.
 ``` 
 Si nosotros redirigimos la salida de `cat` a un fichero llamado dias-de-la-semana.txt, escribimos los días de la semana y al teminar pulsamos `Ctrl+D` (interrumpe procesos de forma no abrupta), habremos creado un fichero nuevo con los días de la semana.
 ```
-cat > dias-de-la-semana.txt
+$cat > dias-de-la-semana.txt
 lunes
 martes
 miercoles
@@ -197,7 +197,7 @@ domingo
 [[Ctrl+D]]
 ```
 ```
-cat dias-de-la-semana
+$cat dias-de-la-semana
 lunes
 martes
 miercoles
@@ -208,14 +208,14 @@ domingo
 ```
 Sin embargo, `cat` es bastante rudimentario y limitado. Por ejemplo, no me dejaría editar el fichero existente para añadir tildes a los días de la semana y, por eso, no podemos decir que `cat` sea un editor de textos. Para ello, es mejor usar verdaderos editores de texto, como `nano`, el editor más usado. `nano` es una herramienta que nos sirve para crear y editar ficheros de texto plano. Los ficheros de texto a los que estamos acostumbrados (ficheros .doc como los de Word) no son ficheros de texto plano, por lo que `nano` no podrá trabajar con ellos. Prueba a crear un fichero-nuevo2.txt con `nano` e inspecciona la interfaz de `nano` para acostumbrarte a ella. Es bastante intuitiva.
 ```
-nano fichero-nuevo2.txt
+$nano fichero-nuevo2.txt
 ```
 PARA EMPEZAR A USAR NANO OS DEJO EN EL REPOSITORIO UNA CHULETILLA QUE AYUDARÁ (chuleta-gnu-nano.pdf)
 
 ## 5. Filtros básicos y pipelines
 Además de para leer y crear ficheros de texto, `cat` se podría considerar el **filtro** más simple de Bash, ya que no hace nada con la información que le pasamos, la deja como estaba. Existen otros filtros muy útiles y que usaremos muy amenudo. Como su propio nombre indica, estos comandos filtran la información que se les pasa por la entrada y devuelven lo que nos interesa. Por ejemplo, el filtro `sort` ordena todas las líneas de un fichero. Vamos a usarlo con nuestro fichero dias-de-la-semana.txt.
 ```
-sort dias-de-la-semana
+$sort dias-de-la-semana
 domingo
 jueves
 lunes
@@ -229,13 +229,21 @@ viernes
 ```
 Hasta ahora, los filtros no parecen tener mucha utilidad, esto podríamos hacerlo perfectamente en una hoja de cálculo o en un editor de texto. Sin embargo, cuando trabajamos con información derivada de la secuenciacion de ADN, solemos trabajar con archivos muy grandes y pesados que tardan en abrirse y hasta la operación más simple como ordenar sus filas sería un dolor. Así que a partir de ahora vamos a trabajar con un ficheros reales. 
 
-En este repositorio disponéis de un archivo `Staphylococcus-aureus.gtf`. Vamos a inspeccionar este fichero con la orden `less` que tiene la vemtaja de no cargar todo el contenido del fichero en la memoria para mostrarlo, lo que lo hace muy eficiente en memoria. 
+En este repositorio disponéis de un archivo `Staphylococcus-aureus.gtf`. Vamos a inspeccionar este fichero con la orden `less` que tiene la ventaja de no cargar todo el contenido del fichero en la memoria para mostrarlo, lo que lo hace muy eficiente en el uso de memoria. 
 ```
-less Staphylococcus-aureus.gtf
+$ less Staphylococcus-aureus.gtf
 ```
-Con `less` podemos inspeccionar cada línea del fichero, incluso hasta la última línea presionando enter. A estas alturas ya habrás podido comprobar el tamaño de nuestro fichero. Presiona "q" (*quit*) para salir de `less`. Podemos contar las líneas de un fihcero usando el filtro `wc` (*word-count*), el cual cuenta líneas, palabras y caracteres del fichero pasado como argumento.
+Con `less` podemos inspeccionar cada línea del fichero, incluso hasta la última línea presionando enter. A estas alturas ya habrás podido comprobar el tamaño de nuestro fichero. Presiona "q" (*quit*) para salir de `less`. Sería interesante contar las líneas de este fihcero usando el filtro `wc` (*word-count*), el cual cuenta líneas, palabras y caracteres del fichero pasado como argumento.
 ```
+$ wc Staphylococcus-aureus.gtf
+  2780  34554 353205 Staphylococcus-aureus.gtf
 ```
+Si queremos que `wc` nos cuente solo las líneas de nuestro fichero, podemos especificarle la opción `-l`
+```
+$ wc -l Staphylococcus-aureus.gtf
+2780 Staphylococcus-aureus.gtf
+```
+
 Otra opción cuando no queremos cargar todo el contenido de un fichero en nuestra pantalla es usar los filtros `head` y `tail` que mostrarán las 10 primeras y las 10 últimas líneas de nuestro fichero, respectivamente.
 ```
 head Staphylococcus-aureus.gtf
@@ -267,18 +275,16 @@ AP017922.1      FIG     RNA     2163404 2164968 .       -       .       ID=fig|6
 ¿Y si nos interesaran las 20 primeras líneas? Existe la opcion `-n` para indicarle en número de líneas que queremos que `head` o `tail` nos muestren por pantalla.
 Inténtalo en tu consola.
 ```
-head -n20 Staphylococcus-aureus.gtf
+$head -n20 Staphylococcus-aureus.gtf
 ```
 Si has sido lo suficientemente observador, te habrás fijado en que la tercera columna de nuestro gtf indica el tipo de anotación o *features* (CDS, RNA, etc). Vamos a intentar contar cuántas anotaciones hay de cada tipo. Aquí, el filtro `cut` nos viene al pelo, ya que es ideal para trabajar con datos tabulados como nuestro gtf. `cut`, como su nombre indica, sirve para cortar los datos de nuestro fichero y sacar lo que nos interesa. En realidad, para que cut corte las columnas que nos interesan tenemos que indicarle la opcion `-f` y a continuación (sin espacio) las columnas separadas por comas (2,3) o un rango de columnas (2-3).
 ```
-cut -f2-3 Staphylococcus-aureus.gtf
+$cut -f2-3 Staphylococcus-aureus.gtf
 ```
-Por defecto, cut va a interpretar el tabulador como el separador por defecto de nuestros datos. Pero podemos especificar el que queramos con la opción -d. Aquí va un ejemplo sencillo:
-```
-```
-Como orden complementaria a cut, existe paste. Esta orden toma una línea del fichero y le añade lo que queremos. Por ejemplo, para unir nuestros ficheros .bed horizontalmente usando un tabulador, haríamos:
-```
-```
+Por defecto, `cut` va a interpretar el tabulador como el separador de nuestros datos. Pero podemos especificar el que queramos con la opción `-d`. Muy útil cuando trabajamos con csv.
+
+Como orden complementaria a `cut`, existe `paste`. Esta orden toma una línea del fichero y le añade lo que queremos. 
+
 Pero bueno, no nos desviemos. Después de ejecutar `cut -f2-3` os habrán aparecido en pantalla un montón de líneas. Sin embargo, lo que a nosotros nos interesa es el número que hay de cada *feature*. El filtro `uniq` nos ayudará, ya que su función es quitar ocurrencias repetidas, es decir, nos mostrará por pantalla sólo las líneas únicas. Además, con la opción -c nos contará cuántas veces aparece cada línea.
 ```
 cut -f2-3 Staphylococcus-aureus.gtf | uniq -c
@@ -310,7 +316,7 @@ $ cut -f2-3 Staphylococcus-aureus.gtf | sort | uniq -c
     180 FIG     tRNA
 ```
 
-¡Conseguido! Como veis, la combinación de filtros puede sernos de mucha utilidad cuando inspeccionamos archivos procedentes de la secuenciación o anotación de genomas. Estos son sólo algunos filtros de los más usados y útiles, pero no son los únicos.
+¡Conseguido! Como veis, la combinación de filtros puede sernos de mucha utilidad cuando inspeccionamos archivos procedentes de la secuenciación o anotación de genomas. Estos son sólo algunos filtros de los más usados, pero no son los únicos.
 
 ## 6. Filtros avanzados
 Hasta ahora hemos visto filtros con funciones bastante simples. En este apartado veremos tres filtros con funciones un poco más complejas: `grep`, `awk` y `sed`.
@@ -318,12 +324,15 @@ Hasta ahora hemos visto filtros con funciones bastante simples. En este apartado
 ### grep
 `grep` es el filtro por exelencia para trabajar en línea de comandos con Bash. Llega a ser hasta 5 veces más rápido que cualquier otro filtro o cualquier otra herramienta de búsqueda parecida que podamos escribir en Python o en R, por ejemplo. Esta rapidez de acción se debe a que `grep` está diseñada específicamente para cumplir una sola función muy muy bien: buscar en un fichero las **líneas** que casan con un **patrón**.
 
-Así `grep` recibe dos argumentos obligatorios:
+Así, `grep` recibe dos argumentos obligatorios:
 - El patrón a buscar (cadena o expresión regular).
 - El fichero o ficheros donde queremos que busque el patrón.
 
 Un ejemplo sencillo sería, por ejemplo, buscar las palabras que contengan la letra V en nuestro archivo dias-de-la-semana.txt:
 ```
+$ grep "v" dias-de-la-semana.txt
+jueves
+viernes
 ```
 Las comillas para definir el patrón no son obligatorias, pero es mejor que acostumbres a hacerlo así, ya que si tenemos que buscar un patrón que contenga espacios, probablemente `grep` sepa interpretarlo bien.
 
@@ -334,13 +343,13 @@ wc -l Staphylococcus-aureus.gtf
 ```
 En realidad, esto no nos interesa ya que el encabezado aporta más bien poco cuando queremos saber el número de anotaciónes que tenemos en el gtf. Vamos a contar ahora todas las líneas de nuestro fichero, sin tener en cuenta el encabezado:
 ```
-grep -vc "^#" Staphylococcus-aureus.gtf
+$grep -vc "^#" Staphylococcus-aureus.gtf
 2779
 ```
 
 **EXPRESIONES REGULARES**
 
-En este punto de la sesión, nos vemos obligados a hacer un alto en el camino para explicar qué son las **expresiones regulares**, ya que la potencia de `grep` se ve incrementada con el uso de expresiones regulares en sus patrones. De hecho, `grep` viene de *global-regular-expression-print* . Las expresiones regulares no son más que secuencias de caractéres que especifican un patrón de búsqueda en un texto. En realidad se llaman METACARACTERES. Si quieres saber más, puedes visitar este [Link](https://en.wikipedia.org/wiki/Regular_expression#Standards).
+En este punto de la sesión, nos vemos obligados a hacer un alto en el camino para explicar qué son las **expresiones regulares**, ya que la potencia de `grep` se ve incrementada con el uso de expresiones regulares en sus patrones. De hecho, `grep` viene de *global-regular-expression-print* . Las expresiones regulares no son más que secuencias de caracteres que especifican un patrón de búsqueda en un texto. En realidad se llaman METACARACTERES. Si quieres saber más, puedes visitar este [Link](https://en.wikipedia.org/wiki/Regular_expression#Standards).
 
 Existen muchos metacaracteres que podemos emplear para las expresiones regulares. De hecho, nosotras ya hemos usado una en nuestro patrón `"^#"`. Este símbolo significa "líneas cuyo primer carácter sea #". Aquí te dejo algunas más:
 
