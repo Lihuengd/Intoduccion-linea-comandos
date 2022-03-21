@@ -366,7 +366,7 @@ Existen muchos metacaracteres que podemos emplear para las expresiones regulares
 | {m,n}            | Casa **m a n** ocurrencias (intervalo cerrado) del carácter (o grupo de caracteres/expresiones) inmediatamente a la izquierda                                                                                                 |
 | \|               | Combina expresiones regulares con un OR                                                                                                                                                                 |
 | \                | Escapar metacaracteres. Se usa cuando se quiere casar con un metacaracter literalmente. Por ejemplo, `\.` casa con un punto, y `\?` casa con un símbolo de cierre de interrogación.                                                                   |
-| ( )              | Usado para agrupar caracteres en una única unidad, a los que se le podrán aplicar modificadores como `*` o `+`. También se usa para delimitar el alcance de una expresión OR `(|)`, o en expresiones avanzadas para insertar reemplazos. |
+| ( )              | Usado para agrupar caracteres en una única unidad, a los que se le podrán aplicar modificadores como `*` o `+`. También se usa para delimitar el alcance de una expresión OR, o en expresiones avanzadas para insertar reemplazos. |
 
 
 
@@ -379,7 +379,7 @@ $ grep -E -c 'peg.[0-9]{0,9}' Staphylococcus-aureus.gtf
 ```
 Para explicar este ejemplo, iremos paso por paso. Primero analizamos las opciones utilizadas. En este caso he usado la opción `-c` para contar las líneas que coinciden con el patrón (ya la hemos visto) y la opción -E para que grep entienda que le voy a pasar una Expresión Regular Extendida (EREs). Existen las Expresiones Regulares Básicas (BREs), que son las que entiende `grep` por defecto y se limitan a unos pocos metacaracteres (`^`, `$`, `.` y `*`), y existen las EREs que son más modernas y admiten más metacaracteres y nos dan mucho más juego. Como `grep` fue diseñada para BREs, tenemos que indicarle con la opción -E que vamos a usar EREs en nuestro patrón.
 
-Por su parte, el patrón `peg.[0-9]{0,9}` le dice a grep que busque líneas que casen con "peg." seguidas de un número comprendido ente 0 y 9 y que esos números pueden repetirse de 0 a 9 veces, es decir, que busque todas las combinaciones posibles de números. En definitiva, todos los números o, dicho correctamente, todos los peg que hay en nuestras anotaciones. Podemos comprobarlo observando las primeras y últimas líneas:
+Por su parte, el patrón `peg.[0-9]{0,9}` le dice a grep que busque líneas que casen con "peg." seguidas de un número comprendido ente 0 y 9 y que esos números pueden repetirse de 0 a 9 veces, es decir, que busque todas las combinaciones posibles de números hasta nueve digitos. En definitiva, todos los números o, dicho correctamente, todos los peg que hay en nuestras anotaciones. Podemos comprobarlo observando las primeras y últimas líneas:
 ```
 grep -E 'peg.[0-9]{0,9}' Staphylococcus-aureus.gtf | head
 AP017922.1      FIG     CDS     517     1878    .       +       1       ID=fig|6666666.735992.peg.1;Name=Chromosomal replication initiator protein DnaA
@@ -434,6 +434,32 @@ peg.2550
 peg.2551
 ```
 
-Lo cierto es que esta aplicación de `grep` puede parecer sencilla, pero puede llegar a ser muy poderosa y útil. De hecho, `grep`es el pan nuestri de cada día cuando trabajamos en línea de comandos. PARA PROFUNDIZAR MÁS EN EL USO DE METACARACTERES CON GREP OS FACILITO UNA GUÍA MUY ÚTIL [AQUÍ](https://staff.washington.edu/weller/grep.html). 
+Lo cierto es que esta aplicación de `grep` puede parecer sencilla, pero llega a ser muy poderosa. De hecho, `grep` es el pan nuestro de cada día cuando trabajamos en línea de comandos. PARA PROFUNDIZAR MÁS EN EL USO DE METACARACTERES CON GREP OS FACILITO UNA GUÍA MUY ÚTIL [AQUÍ](https://staff.washington.edu/weller/grep.html). 
 
 ### awk
+Ahora que conocemos un poco el funcionamiento de `grep`, nos damos cuenta de que es un filtro un poco más complejo que los anteriores, pero, aún así sigue siendo relativamente sencillo. En este apartado trataremos de entender el funcionamiento de `awk`, un filtro que permite hacer análisis exploratorio de datos de forma más compleja, ya que permite el uso de expresiones lógicas (x>20). 
+
+En realidad, `awk` es un lenguaje de programación muy pequeñito orientado al procesamiento de textos. Es muy útil para trabajar con datos tabulares y que procesa los datos de entrada fila por fila asignandole la fila leida a un variable `$0`, mientras que todos los campos (columnas) que compongan esta fila seran asignadas a las variables `$1`, `$2`, `$3`, etc. 
+
+`awk` usará la siguientes estructura como argumento: `patron {acción}`, donde el patrón será una expresión lógica (ej.: $1>100) o una expresión regular. Cuando este patrón se evalúe a cierto, o la expresión regular case con el texto en cuestión, `awk` ejecutará la acción. Si omitimos el patrón, `awk` ejecutará la acción en todas las filas, mientras que si omitimos la acción pero especificamos un patrón, `awk` imprimirá todos los campos que casen con el patrón.
+```
+$ awk '{ print $0 }' Staphylococcus-aureus.gtf
+.
+.
+.
+(muchas cosas)
+```
+Como vemos, `awk` ha ejecutado la acción "mostrar fila" (`print $0`) en todo el gtf, ya que no se le ha indicado ningún patrón. Esto sería cumplir la misma función que `cat`.
+
+También podemos usar `awk` para mostrar ciertas columnas de nuestro fichero:
+```
+$ grep -v "^#" Staphylococcus-aureus.gtf | awk '{ print $1 " " $4 " " $5 }' | head -n5
+AP017922.1 517 1878
+AP017922.1 2155 3288
+AP017922.1 3678 3914
+AP017922.1 3911 5023
+AP017922.1 5033 6967
+```
+Esta misma pipeline que combina `grep` y `awk`, podría realizarse usando solamente `awk`, pero para ello debemos introducir expresiones lógicas. Algunas que acepta `awk` son: `a == b` (a es igual a b), `a != b`	(a no es igual a b), `a < b`	(a es menor que b), `a > b`	(a es mayor que b), `a <= b`	(a es menor o igual a b), `a >= b`	(a es mayor o igual a b), `a ~ b`	(a casa con la expresión regular b), `a !~ b`	(a no casa con la expresión regular b), `a && b`	(operador lógico AND), `a || b`	(operador lógico OR), y `!a`	(negación lógica).
+
+
