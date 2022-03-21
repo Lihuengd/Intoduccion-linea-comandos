@@ -510,7 +510,12 @@ Vemos que he sustituido todas los "ID" de mi documento por "AD". El flag `g` del
 Esto en realidad, no sirve para absolutamente nada, pero puede ser de grán utilidad cuando se trata de adaptar nuestros streams rápidamente para que sean aceptados por otras herramientas.
 
 
-## 7. Más comandos
+## 7. Más comandos de utilidad
 Para terminar, os he querido dejar por aquí algunos comandos de gran utilidad cuando estéis trabajando en línea de comandos:
 
-
+**Instalación de programas**
+**Crear entornos**
+**Conexiones ssh**
+**Descarga de datos**
+**Clonar repositorio de GitHub en nuestro ordenador**
+**Comprimir y descomprimir archivos**
